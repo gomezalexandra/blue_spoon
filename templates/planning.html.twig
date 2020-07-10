@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} planning {% endblock %}
+
+{% block body %}
+    <div class="blockHead">
+        <div class="row title">
+            <h1 class="col-12" > Planifier son projet </h1>
+        </div>
+
+        <div class="row d-flex justify-content-center homepageButton">
+            <a class="col-5 center" href="{{ path('app_register') }}"> S'enregistrer </a>
+            <a class="col-5 center" href="{{ path('app_login') }}"> Se connecter </a>
+        </div>
+    </div>
+
+    <div class="row planningSteps">
+        <div class="col-12">
+            <div class="row">
+                <h2 class="col-12">Pourquoi planifier ?</h2>
+            </div>
+            <div class="row">
+                <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis. Maecenas tempus interdum fermentum. </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row planningFact">
+        <div class="col-5">Image</div>
+        <div class="col-7">
+            <p class="planningData">2351</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+    </div>
+
+    <div class="row planningSteps">
+        <div class="col-12">
+            <div class="row">
+                <h2 class="col-12">Comment planifier ?</h2>
+            </div>
+            <div class="row">
+                <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis. Maecenas tempus interdum fermentum. </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

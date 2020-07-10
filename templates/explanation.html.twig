@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} how it works {% endblock %}
+
+{% block body %}
+    <div class="blockHead">
+        <div class="row title">
+            <h1 class="col-12" > L'application </h1>
+        </div>
+
+        <div class="row d-flex justify-content-center homepageButton">
+            <a class="col-5 center" href="{{ path('app_register') }}"> S'enregistrer </a>
+            <a class="col-5 center" href="{{ path('app_login') }}"> Se connecter </a>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 center slideshow">
+            diaporama
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center explanationSteps">
+        <div class="col-12">
+            <div class="row">
+                <h3 class="col-12">S'inscrire</h3>
+            </div>
+            <div class="row">
+                <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis. Maecenas tempus interdum fermentum. </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center explanationSteps">
+        <div class="col-12">
+            <div class="row">
+                <h3 class="col-12">Compléter</h3>
+            </div>
+            <div class="row">
+                <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis. Maecenas tempus interdum fermentum. </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center explanationSteps">
+        <div class="col-12">
+            <div class="row">
+                <h3 class="col-12">Analyser</h3>
+            </div>
+            <div class="row">
+                <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis. Maecenas tempus interdum fermentum. </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center bluespoon">
+        <img class="col-10" src="{{ asset('images/bluespoon.png') }}">
+    </div>
+
+    <div class="row explanationSecurity">
+        <div class="col-4">Image</div>
+        <div class="col-8">
+            <h3>Sécurité</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis.</p>
+        </div>
+    </div>
+
+    <div class="row explanationSecurity">
+        <div class="col-8">
+            <h3>Flexibilité</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet leo nunc. Aenean vel libero id augue rhoncus convallis.</p>
+        </div>
+        <div class="col-4">Image</div>
+    </div>
+
+{% endblock %}

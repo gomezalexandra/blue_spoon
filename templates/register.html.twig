@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} register {% endblock %}
+
+{% block body %}
+
+<div class="blockHead headLarge">
+    <div class="row title">
+        <h1 class="col-12" > S'enregistrer </h1>
+    </div>
+</div>
+
+    <div class="blueBackground">
+        <div class="row blockRegister">
+            <div class="col-12 noPadding">
+                <div class="row">
+                    <h2 class="col-12 d-flex align-items-center justify-content-center subtitle"> Créer un compte</h2>
+                </div>
+
+                <div>
+                    formulaire
+                </div>
+
+                <div class="row">
+                    <a class="col-12 d-flex align-items-center justify-content-center loginLink" href="{{ path('app_login') }}"> J'ai déjà un compte  ></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

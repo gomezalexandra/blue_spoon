@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} homepage {% endblock %}
+
+{% block body %}
+
+    <div class="blockHead">
+        <div class="row title">
+            <h1 class="col-12 title" > Blue Spoon </h1>
+            <h2 class="col-12" > Simulation de performances pour restaurateurs </h2>
+        </div>
+
+        <div class="row d-flex justify-content-center homepageButton">
+            <a class="col-5 center" href="{{ path('app_register') }}"> S'enregistrer </a>
+            <a class="col-5 center" href="{{ path('app_login') }}"> Se connecter </a>
+        </div>
+    </div>
+
+
+    <div class="row d-flex justify-content-center bluespoon">
+        <img class="col-10" src="{{ asset('images/bluespoon.png') }}">
+    </div>
+
+    <div class="row blockContainer d-flex justify-content-center">
+        <div class="choiceBlock blockStyle1 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_register') }}">Commencer</a></div>
+        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_explanation') }}">L'application</a></div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_planning') }}">Planifier son projet</a></div>
+        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_homepage') }}">Nous contacter</a></div>
+    </div>
+
+{% endblock %}
+
+
+

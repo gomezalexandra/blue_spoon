@@ -1,0 +1,250 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@font-face
+{
+    font-family: 'SirinStencil-Regular';
+    src: url('../fonts/SirinStencil-Regular.ttf');
+}
+
+@font-face
+{
+    font-family: 'BioRhyme-Regular';
+    src: url('../fonts/BioRhyme-Regular.ttf');
+}
+
+@font-face
+{
+    font-family: 'FredokaOne-Regular';
+    src: url('../fonts/FredokaOne-Regular.ttf');
+}
+
+body {
+    background-color: white;
+    font-family: 'BioRhyme-Regular', arial, sans-serif;
+}
+
+footer {
+    background-color: #171C81;
+    height: 70px;
+    margin-top: 80px;
+}
+
+a {
+    font-family: 'BioRhyme-Regular', arial, sans-serif;
+    text-align: center;
+}
+
+h1, .center{
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.7em;
+    font-family: 'SirinStencil-Regular', arial, sans-serif;
+    color: white;
+}
+
+h2 {
+    font-family: 'BioRhyme-Regular', arial, sans-serif;
+    margin: 0px;
+}
+
+h3 {
+    font-family: 'FredokaOne-Regular', arial, sans-serif;
+    margin: 0px;
+}
+
+.noPadding {
+    padding: 0px;
+}
+
+/* part menu */
+.bg-light {
+    background-color: #171C81 !important; /*partie menu*/
+}
+
+.nav-link, .dropdown-item {
+    color: white !important;
+}
+
+.dropdown-menu {
+    background-color: #171C81 !important;
+}
+
+/* part homepage and explanation*/
+.logo {
+    width: 60px;
+    border-radius: 10px;
+}
+
+.title h1, .title h2 {
+    padding: 0;
+}
+
+.title h2 {
+    font-size: 0.7em;
+    color: white;
+}
+
+.blockHead {
+    background-color: #171C81;
+    padding: 40px 10px 20px 10px;
+    border-bottom: 4px #F1C81F solid;
+}
+
+.headLarge {
+    padding-bottom: 100px;
+}
+
+.homepageButton {
+    margin-top: 10px;
+}
+
+.homepageButton a {
+    background-color: #F1C81F;
+    padding: 5px 7px 5px 7px;
+    margin: 40px 10px 0 10px;
+    border-radius: 10px;
+    color: #171C81;
+    font-weight: bold;
+}
+
+.bluespoon {
+    margin: 30px 0 20px 0;
+}
+
+.homepageBlock{
+    height: 200px;
+}
+
+.choiceBlock {
+    height: 130px;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    box-shadow: 7px 7px 4px #28333d42;
+}
+
+.choiceBlock a {
+    color: white;
+    font-size: 0.75em;
+}
+.blockStyle1 {
+    background-color: #F1C81F;
+}
+
+.blockStyle1 a {
+    color: #171C81;
+    font-weight: bold;
+}
+
+.blockStyle2 {
+    background-color: #171C81;
+}
+
+/*part explanation*/
+
+.slideshow { /* TODO */
+    height: 200px;
+    width: 80%;
+    margin: 20px;
+    background-color: #D8E5F2;
+}
+.explanationSteps,.explanationSecurity {
+    color: #171C81;
+}
+
+.explanationSecurity {
+    margin-top: 50px;
+}
+
+.explanationSteps h3, .explanationSecurity h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.explanationSteps p{
+    text-align: justify;
+}
+
+.explanationSecurity p, .explanationSecurity h3 {
+    text-align: center;
+}
+
+/* part dashboard */
+
+.blockDashboard, .blockRegister {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 0 50px 0;
+    box-shadow: 7px 7px 4px #28333d42;
+    position: relative;
+    top: -70px;
+}
+
+.blueBackground {
+    background-color: #D8E5F2;
+}
+
+.subtitle {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 20px 0 40px 0;
+    color: #171C81;
+}
+
+/* part register and login */
+.loginLink {
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 100px;
+    color: #171C81;
+}
+
+/* part simulation */
+.simulationLineGreen {
+    height: 30px;
+    background-color: #aee958;
+}
+
+.simulationLineOrange {
+    height: 30px;
+    background-color: #8e4ccd;
+}
+
+/* par planning */
+
+.planningSteps {
+    text-align: center;
+    margin-top: 40px;
+    color: #171C81;
+}
+
+.planningSteps h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.planningSteps p {
+    padding: 0;
+}
+
+.planningFact {
+    margin: 40px 0 40px 0;
+}
+.planningFact p {
+    color: #171C81;
+}
+
+.planningData {
+    font-weight: bold;
+    font-size: 1.4em;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vYXBwLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDJCQUEyQjtBQUMvQiIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogbGlnaHRncmF5O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==*/

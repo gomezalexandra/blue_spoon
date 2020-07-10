@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} dashboard {% endblock %}
+
+{% block body %}
+
+    <div class="blockHead headLarge">
+        <div class="row title">
+            <h1 class="col-12" > Tableau de bord </h1>
+        </div>
+    </div>
+
+    <div class="blueBackground">
+
+        <div class="row blockDashboard">
+
+            <div class="col-12 noPadding">
+
+                <div class="row">
+                    <h2 class="col-12 d-flex align-items-center justify-content-center subtitle"> Bienvenue Lorem Ipsum !</h2>
+                </div>
+
+                <div class="row blockContainer d-flex justify-content-center">
+                    <div class="choiceBlock blockStyle1 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_homepage') }}"">Nouvelle simulation</a></div>
+                    <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_homepage') }}">Mes simulations</a></div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_homepage') }}">Mes brouillons</a></div>
+                    <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_homepage') }}">Mon profil</a></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
