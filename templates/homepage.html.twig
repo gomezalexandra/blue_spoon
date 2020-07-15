@@ -7,28 +7,77 @@
     <div class="blockHead">
         <div class="row title">
             <h1 class="col-12 title" > Blue Spoon </h1>
-            <h2 class="col-12" > Simulation de performances pour restaurateurs </h2>
+            <h2 class="col-12 d-flex justify-content-center" > Simulation de performances pour restaurateurs </h2>
         </div>
 
         <div class="row d-flex justify-content-center homepageButton">
-            <a class="col-5 center" href="{{ path('app_register') }}"> S'enregistrer </a>
-            <a class="col-5 center" href="{{ path('app_login') }}"> Se connecter </a>
+            <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_register') }}"> S'enregistrer </a>
+            <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_login') }}"> Se connecter </a>
         </div>
     </div>
 
 
     <div class="row d-flex justify-content-center bluespoon">
-        <img class="col-10" src="{{ asset('images/bluespoon.png') }}">
+        <img class="col-10 col-md-7" src="{{ asset('images/bluespoon.png') }}">
     </div>
 
     <div class="row blockContainer d-flex justify-content-center">
-        <div class="choiceBlock blockStyle1 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_register') }}">Commencer</a></div>
-        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_explanation') }}">L'application</a></div>
+        <div class="choiceBlock blockStyle1 d-flex align-items-center justify-content-center col-5">
+            <a href="{{ path('app_register') }}">
+                <div class="icon">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-file-earmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 1H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5v-1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h5v2.5A1.5 1.5 0 0 0 10.5 6H13v2h1V6L9 1z"/>
+                        <path fill-rule="evenodd" d="M13.5 10a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M13 12.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+                    </svg>
+                </div>
+                <p>
+                    Commencer
+                </p>
+            </a>
+        </div>
+        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5">
+            <a href="{{ path('app_explanation') }}">
+                <div class="icon">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-app-indicator" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                        <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    </svg>
+                </div>
+                <p>
+                    L'application
+                </p>
+            </a>
+        </div>
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_planning') }}">Planifier son projet</a></div>
-        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5"><a href="{{ path('app_homepage') }}">Nous contacter</a></div>
+        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5">
+            <a href="{{ path('app_planning') }}">
+                <div class="icon">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-calendar2-week-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 2H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM2 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+                        <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                    </svg>
+                </div>
+                <p>
+                   Planifier son projet
+                </p>
+            </a>
+        </div>
+        <div class="choiceBlock blockStyle2 d-flex align-items-center justify-content-center col-5">
+            <a href="{{ path('app_homepage') }}">
+                <div class="icon">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                    </svg>
+                </div>
+                <p>
+                   Nous contacter
+                </p>
+            </a>
+        </div>
     </div>
 
 {% endblock %}

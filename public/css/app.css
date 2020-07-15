@@ -26,12 +26,6 @@ body {
     font-family: 'BioRhyme-Regular', arial, sans-serif;
 }
 
-footer {
-    background-color: #171C81;
-    height: 70px;
-    margin-top: 80px;
-}
-
 a {
     font-family: 'BioRhyme-Regular', arial, sans-serif;
     text-align: center;
@@ -57,8 +51,19 @@ h3 {
     margin: 0px;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #171C81;
+    border: 2px solid #F1C81F;
+    margin: auto;
+}
+
 .noPadding {
     padding: 0px;
+}
+
+.icon {
+    margin: 13px;
 }
 
 /* part menu */
@@ -74,6 +79,23 @@ h3 {
     background-color: #171C81 !important;
 }
 
+.dropdown-menu a{
+    text-align: center;
+    color: #F1C81F !important;
+}
+
+.navbar-toggler {
+    background-color: white !important;
+}
+
+.navbar-toggler:hover{
+    background-color: #F1C81F !important;
+}
+
+.navbar-nav {
+    margin: auto;
+}
+
 /* part homepage and explanation*/
 .logo {
     width: 60px;
@@ -87,6 +109,7 @@ h3 {
 .title h2 {
     font-size: 0.7em;
     color: white;
+    text-align: center;
 }
 
 .blockHead {
@@ -122,10 +145,11 @@ h3 {
 
 .choiceBlock {
     height: 130px;
-    margin: 10px;
+    margin:3%;
     padding: 5px;
     border-radius: 20px;
     box-shadow: 7px 7px 4px #28333d42;
+    max-width: 400px;
 }
 
 .choiceBlock a {
@@ -176,19 +200,20 @@ h3 {
 
 /* part dashboard */
 
-.blockDashboard, .blockRegister {
-    margin-left: 20px;
-    margin-right: 20px;
+.blockDashboard {
+    margin: auto;
     background-color: white;
     border-radius: 20px;
     padding: 20px 0 50px 0;
     box-shadow: 7px 7px 4px #28333d42;
     position: relative;
     top: -70px;
+    max-width: 1000px;
 }
 
 .blueBackground {
     background-color: #D8E5F2;
+    padding: 0 20px 0 20px;
 }
 
 .subtitle {
@@ -199,12 +224,29 @@ h3 {
 }
 
 /* part register and login */
+
+.iconLogin {
+    margin: 25px;
+    text-align: center;
+}
+
 .loginLink {
     font-size: 1em;
     text-align: center;
     font-weight: bold;
-    margin-top: 100px;
+    margin-top: 50px;
     color: #171C81;
+}
+
+.blockRegister {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 10px 50px 10px;
+    box-shadow: 7px 7px 4px #28333d42;
+    position: relative;
+    top: -70px;
 }
 
 /* part simulation */
@@ -218,7 +260,7 @@ h3 {
     background-color: #8e4ccd;
 }
 
-/* par planning */
+/* part planning */
 
 .planningSteps {
     text-align: center;
@@ -246,5 +288,16 @@ h3 {
 .planningData {
     font-weight: bold;
     font-size: 1.4em;
+}
+
+/* footer */
+
+footer {
+    background-color: #171C81;
+    height: 70px;
+    margin-top: 80px;
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
 }
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vYXBwLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDJCQUEyQjtBQUMvQiIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogbGlnaHRncmF5O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==*/
