@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class FrontController extends AbstractController
@@ -48,16 +49,22 @@ class FrontController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(EntityManagerInterface $em, Request $request) {
+    public function register(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder) {
+
         $form = $this->createForm(UserRegistrationFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            /** @var User $userRegistration */
-            $userRegistration = $form->getData();
 
-            $em->persist($userRegistration);
+            /** @var User $user */
+            $user = $form->getData();
+
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $user->getPassword()
+            ));
+
+            $em->persist($user);
             $em->flush();
 
             $this->addFlash('success', 'Enregistrement effectué !');
