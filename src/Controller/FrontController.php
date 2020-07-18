@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserFormType;
+use App\Form\UserRegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,10 +48,28 @@ class FrontController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register() {
+    public function register(EntityManagerInterface $em, Request $request) {
+        $form = $this->createForm(UserRegistrationFormType::class);
+        $form->handleRequest($request);
 
-        return $this->render('register.html.twig');
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            /** @var User $userRegistration */
+            $userRegistration = $form->getData();
+
+            $em->persist($userRegistration);
+            $em->flush();
+
+            $this->addFlash('success', 'Enregistrement effectué !');
+
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        return $this->render('register.html.twig', [
+            'userRegistrationForm' => $form->createView(),
+        ]);
     }
+
 
     /**
      * @Route("/login", name="app_login")
