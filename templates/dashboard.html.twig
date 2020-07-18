@@ -17,7 +17,10 @@
             <div class="col-12 noPadding">
 
                 <div class="row">
-                    <h2 class="col-12 d-flex align-items-center justify-content-center subtitle"> Bienvenue Lorem Ipsum !</h2>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <h2 class="col-12 d-flex align-items-center justify-content-center subtitle"> Vous êtes connecté en tant que : {{ app.user.name }}. </h2>
+                    {% endif %}
+
 
                     {% for message in app.flashes('success') %}
                         <div class="alert alert-success">

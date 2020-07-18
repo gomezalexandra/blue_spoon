@@ -10,10 +10,18 @@
             <h2 class="col-12 d-flex justify-content-center" > Simulation de performances pour restaurateurs </h2>
         </div>
 
-        <div class="row d-flex justify-content-center homepageButton">
-            <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_register') }}"> S'enregistrer </a>
-            <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_login') }}"> Se connecter </a>
-        </div>
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="row d-flex justify-content-center homepageButton">
+                <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_register') }}"> S'enregistrer </a>
+                <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_login') }}"> Se connecter </a>
+            </div>
+        {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="row d-flex justify-content-center homepageButton">
+                <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_dashboard') }}"> Tableau de bord </a>
+                <a class="col-5 col-sm-3 col-lg-2 center" href="{{ path('app_logout') }}"> Se déconnecter </a>
+            </div>
+        {% endif %}
     </div>
 
 
@@ -62,7 +70,7 @@
                     </svg>
                 </div>
                 <p>
-                   Planifier son projet
+                   Pourquoi planifier ?
                 </p>
             </a>
         </div>
