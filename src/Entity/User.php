@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -38,6 +40,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Simulation::class, mappedBy="user_id")
+     */
+    private $simulations;
+
+    public function __construct()
+    {
+        $this->simulations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +137,37 @@ class User implements UserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Simulation[]
+     */
+    public function getSimulations(): Collection
+    {
+        return $this->simulations;
+    }
+
+    public function addSimulation(Simulation $simulation): self
+    {
+        if (!$this->simulations->contains($simulation)) {
+            $this->simulations[] = $simulation;
+            $simulation->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSimulation(Simulation $simulation): self
+    {
+        if ($this->simulations->contains($simulation)) {
+            $this->simulations->removeElement($simulation);
+            // set the owning side to null (unless already changed)
+            if ($simulation->getUserId() === $this) {
+                $simulation->setUserId(null);
+            }
+        }
 
         return $this;
     }
