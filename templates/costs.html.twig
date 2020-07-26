@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} charges {% endblock %}
+
+{% block body %}
+
+    {{ form_start(costsForm) }}
+
+    {{ form_widget(costsForm) }}
+
+    <button type="submit" class="btn btn-primary">Create!</button>
+    {{ form_end(costsForm) }}
+
+{% endblock %}

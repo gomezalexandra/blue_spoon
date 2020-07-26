@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} chiffre d'affaire {% endblock %}
+
+{% block body %}
+
+    {{ form_start(turnoverForm) }}
+
+    {{ form_widget(turnoverForm) }}
+
+    <button type="submit" class="btn btn-primary">Create!</button>
+    {{ form_end(turnoverForm) }}
+
+{% endblock %}

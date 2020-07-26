@@ -2,21 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Incomes;
+use App\Entity\Turnover;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class IncomesFormType extends AbstractType
+class TurnoverFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('bank_loan')
-            ->add('personnal_contribution')
-            ->add('contribution_in_kind')
-            ->add('starting_grant')
-            ->add('others_incomes')
+            ->add('month_worked')
+            ->add('days_worked')
+            ->add('daily_revenue')
+            ->add('turnover_increase')
             //->add('simulation')
         ;
     }
@@ -24,7 +23,7 @@ class IncomesFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Incomes::class,
+            'data_class' => Turnover::class,
         ]);
     }
 }

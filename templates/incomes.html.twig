@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} revenues {% endblock %}
+
+{% block body %}
+
+    {{ form_start(incomesForm) }}
+
+    {{ form_widget(incomesForm) }}
+
+    <button type="submit" class="btn btn-primary">Create!</button>
+    {{ form_end(incomesForm) }}
+
+{% endblock %}
