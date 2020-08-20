@@ -203,12 +203,6 @@ class SimulationController extends AbstractController
             $costs = $request->getSession()->get('costs');
             $costs->setSimulation($simulation);
 
-
-            dump($simulation);
-            dump($firstNeeds);
-
-
-
             $em->persist($simulation);
             $em->persist($firstNeeds);
             $em->persist($turnover);
