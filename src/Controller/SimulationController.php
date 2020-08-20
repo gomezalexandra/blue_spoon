@@ -223,11 +223,4 @@ class SimulationController extends AbstractController
         return $this->redirectToRoute('app_new_simulation');
     }
 
-    /**
-     * @Route("/simulation_view", name="app_simulation_view")
-     */
-    public function simulationView()
-    {
-        return $this->redirectToRoute('app_simulation_view');
-    }
 }

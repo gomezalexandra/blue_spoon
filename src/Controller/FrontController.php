@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Costs;
 use App\Entity\Simulation;
+use App\Entity\Turnover;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
@@ -50,7 +52,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/simulations_list", name="app_simulations_list")
      */
-    public function simulations_list(EntityManagerInterface $em)
+    public function simulationsList(EntityManagerInterface $em)
     {
         $repository = $em->getRepository(Simulation::class);
         /**@var Simulation $simulations */
@@ -60,9 +62,69 @@ class FrontController extends AbstractController
             throw $this->createNotFoundException(sprintf('No simulation '));
         }
 
-        dump($repository);
         return $this->render('simulations_list.html.twig', [
             'simulations' => $simulations
+        ]);
+    }
+
+    /**
+     * @Route("/simulations_draft", name="app_simulations_draft")
+     */
+    public function simulationsDraft(EntityManagerInterface $em)
+    {
+        $repository = $em->getRepository(Simulation::class);
+        /**@var Simulation $simulations */
+        $simulations = $repository->findBy([], ['id' => 'DESC']);
+
+        if (!$simulations) {
+            throw $this->createNotFoundException(sprintf('No simulation '));
+        }
+
+        return $this->render('simulations_draft.html.twig', [
+            'simulations' => $simulations
+        ]);
+    }
+
+    /**
+     * @Route("/simulation_view/{slug}", name="app_simulation_view")
+     */
+    public function simulationView($slug, EntityManagerInterface $em) {
+
+        $repositorySimulation = $em->getRepository(Simulation::class);
+        $repositoryTurnover = $em->getRepository(Turnover::class);
+        $repositoryCost = $em->getRepository(Costs::class);
+
+        /**@var Simulation $simulations */
+        $simulation = $repositorySimulation->find($slug);
+
+        /** @var Turnover $turnover */
+        $turnover = $repositoryTurnover->findOneBy(['simulation' => $slug]);
+
+        /** @var Costs $cost */
+        $cost = $repositoryCost->findOneBy(['simulation' => $slug]);
+
+
+        if (!$simulation || !$turnover) {
+            throw $this->createNotFoundException(sprintf('No simulation or turnover')); //TODO
+        }
+
+
+        $turnover1 = ($turnover->getMonthWorked())*($turnover->getDaysWorked())*($turnover->getDailyRevenue());
+        $turnover2 = $turnover1*($turnover->getTurnoverIncrease());
+
+        $variableCosts1 = $turnover1 * ($cost->getVariableCosts());
+        $variableCosts2 = $turnover2 * ($cost->getVariableCosts());
+
+
+
+        return $this->render('simulation_view.html.twig', [
+            'simulation' => $simulation,
+            'cost' => $cost,
+            'turnover' => $turnover,
+            'turnover1' => $turnover1,
+            'turnover2' => $turnover2,
+            'variableCosts1' => $variableCosts1,
+            'variableCosts2' => $variableCosts2,
         ]);
     }
 

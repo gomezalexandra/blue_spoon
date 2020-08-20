@@ -4,12 +4,10 @@
 
 {% block body %}
 
-    <p>Mes Simulation</p>
+    <p>Mes Simulations</p>
 
     {% for simulation in simulations %}
-        simulation numéro: {{ simulation.id }}
-        {{ simulation.createdAt|date('d/m/Y') }}
-        {{ simulation.name }} </br>
+        <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}"> Voir {{ simulation.name }} créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
     {% endfor %}
 
 {% endblock %}

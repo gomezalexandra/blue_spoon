@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} All drafts {% endblock %}
+
+{% block body %}
+
+    <p>Mes Brouillons</p>
+
+    {% for simulation in simulations %}
+        <a> Reprendre {{ simulation.name }}
+            sauvegardée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
+    {% endfor %}
+
+{% endblock %}

@@ -6,12 +6,95 @@
 
    <p>test simulation view</p>
 
+   <p>Détail de la simulation {{ simulation.name }} créée le {{ simulation.createdAt|format_datetime(locale='fr') }}. </br>
+
+   <h2>Compte de résultat</h2>
+
+   <table>
+      <tr>
+         <td></td>
+         <td>Année 1</td>
+         <td>Année 2</td>
+      </tr>
+      <tr>
+         <td>chiffre d'affaire HT</td>
+         <td>{{ turnover1 }}</td>
+         <td>{{ turnover2 }}</td>
+      </tr>
+      <tr>
+         <td><h4>Total produits d'exploitation :</h4></td>
+         <td>{{ turnover1 }}</td>
+         <td>{{ turnover2 }}</td>
+      </tr>
+      <tr>
+         <td>Charges variables (dont achats consommés)</td>
+         <td>{{ variableCosts1 }}</td>
+         <td>{{ variableCosts2 }}</td>
+      </tr>
+      <tr>
+         <td>Impôts, taxes et versements assimilés</td>
+         <td>{{ cost.taxes }}</td>
+         <td>{{ cost.taxes }}</td>
+      </tr>
+      <tr>
+         <td>Salaires et charges sociales</td>
+         <td>{{ cost.salaries }}</td>
+         <td>{{ simulation.name }}</td>
+      </tr>
+      <tr>
+         <td>Loyer</td>
+         <td>{{ cost.rent }}</td>
+         <td>{{ cost.rent }}</td>
+      </tr>
+      <tr>
+         <td>Insurance</td>
+         <td>{{ cost.insurance }}</td>
+         <td>{{ cost.insurance }}</td>
+      </tr>
+      <tr>
+         <td>Autres coûts fixes</td>
+         <td>{{ cost.othersFixedCosts }}</td>
+         <td>{{ cost.othersFixedCosts }}</td>
+      </tr>
+      <tr>
+         <td><h4>Total charges d'exploitation :</h4></td>
+         <td>{{ simulation.name }}</td>
+         <td>{{ simulation.name }}</td>
+      </tr>
+      <tr>
+         <td><h3>Résultat d'exploitation</h3></td>
+         <td>{{ simulation.name }}</td>
+         <td>{{ simulation.name }}</td>
+      </tr>
+      <tr>
+         <td><h3>Résultat courant avant impôt</h3></td>
+         <td>{{ simulation.name }}</td>
+         <td>{{ simulation.name }}</td>
+      </tr>
+      <tr>
+         <td>Impôt sur les bénéfices</td>
+         <td>{{ cost.corporationTax }}</td>
+         <td>{{ simulation.name }}</td>
+      </tr>
+      <tr>
+         <td><h3>Bénéfice ou Perte</h3></td>
+         <td>{{ simulation.name }}</td>
+         <td>{{ simulation.name }}</td>
+      </tr>
+
+
+   </table>
+
+
+   <h2>Comparaison revenue/charge</h2>
    <canvas id="myChart" width="400" height="100"></canvas>
+
+   <h2>Répartition des charges</h2>
    <canvas id="myDoughnutChart" width="400" height="100"></canvas>
 
 {% endblock %}
 
-{#
+
 {% block javascripts %}
    {{ parent() }}
    <script>
@@ -19,16 +102,52 @@
       var myChart = new Chart(ctx, {
          type: 'bar',
          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['Besoin initial', 'Apport initial', "Chiffre d\'affaire", 'Charge fixes', 'Charges variables'],
             datasets: [{
-               label: '# of Votes',
-               data: [25, 19, {{ product.name }}, {{ product.years }}, {{ product.status }}, 3],
+               label: "valeur en euros par année d\'exercice",
+               data: [25, 19, 2, 2, {{ simulation.id }}],
+               backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)'
+               ],
+               borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)'
+               ],
+               borderWidth: 1
+            }]
+         },
+         options: {
+            scales: {
+               yAxes: [{
+                  ticks: {
+                     beginAtZero: true
+                  }
+               }]
+            }
+         }
+      });
+
+      var test = document.getElementById('myDoughnutChart');
+      var myDoughnutChart = new Chart(test, {
+         type: 'doughnut',
+         data: {
+            labels: ['Salaires', 'Loyer', 'Assurance', 'Autres coûts fixes', 'Charges variables', 'Taxes', 'Impôts'],
+            datasets: [{
+               data: [{{ cost.salaries }}, {{ cost.rent }}, {{ cost.insurance }}, {{ cost.othersFixedCosts }}, {{ cost.variableCosts }}, {{ cost.taxes }}, {{ cost.corporationTax }}],
                backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
                   'rgba(255, 206, 86, 0.2)',
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
                ],
                borderColor: [
@@ -37,6 +156,7 @@
                   'rgba(255, 206, 86, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
                   'rgba(255, 159, 64, 1)'
                ],
                borderWidth: 1
@@ -53,5 +173,4 @@
          }
       });
    </script>
-#}
 {% endblock %}
