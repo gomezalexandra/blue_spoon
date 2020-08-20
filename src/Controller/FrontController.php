@@ -10,6 +10,7 @@ use App\Entity\Turnover;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
+use App\Object\IncomeStatement;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,6 +91,7 @@ class FrontController extends AbstractController
      */
     public function simulationView($slug, EntityManagerInterface $em) {
 
+        // Getting simulation from database
         $repositorySimulation = $em->getRepository(Simulation::class);
         $repositoryTurnover = $em->getRepository(Turnover::class);
         $repositoryCost = $em->getRepository(Costs::class);
@@ -103,28 +105,22 @@ class FrontController extends AbstractController
         /** @var Costs $cost */
         $cost = $repositoryCost->findOneBy(['simulation' => $slug]);
 
-
         if (!$simulation || !$turnover) {
             throw $this->createNotFoundException(sprintf('No simulation or turnover')); //TODO
         }
 
-
-        $turnover1 = ($turnover->getMonthWorked())*($turnover->getDaysWorked())*($turnover->getDailyRevenue());
-        $turnover2 = $turnover1*($turnover->getTurnoverIncrease());
-
-        $variableCosts1 = $turnover1 * ($cost->getVariableCosts());
-        $variableCosts2 = $turnover2 * ($cost->getVariableCosts());
-
+        $incomeStatement = new IncomeStatement();
+        $incomeStatement->calculate($turnover, $cost);
 
 
         return $this->render('simulation_view.html.twig', [
             'simulation' => $simulation,
             'cost' => $cost,
             'turnover' => $turnover,
-            'turnover1' => $turnover1,
-            'turnover2' => $turnover2,
-            'variableCosts1' => $variableCosts1,
-            'variableCosts2' => $variableCosts2,
+            'turnover1' => $incomeStatement->getTurnover1(),
+            'turnover2' => $incomeStatement->getTurnover2(),
+            'variableCosts1' => $incomeStatement->getVariableCost1(),
+            'variableCosts2' => $incomeStatement->getVariableCost2(),
         ]);
     }
 
