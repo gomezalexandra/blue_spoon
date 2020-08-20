@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Simulation;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
@@ -44,6 +45,25 @@ class FrontController extends AbstractController
      */
     public function planning() {
         return $this->render('planning.html.twig');
+    }
+
+    /**
+     * @Route("/simulations_list", name="app_simulations_list")
+     */
+    public function simulations_list(EntityManagerInterface $em)
+    {
+        $repository = $em->getRepository(Simulation::class);
+        /**@var Simulation $simulations */
+        $simulations = $repository->findBy([], ['id' => 'DESC']);
+
+        if (!$simulations) {
+            throw $this->createNotFoundException(sprintf('No simulation '));
+        }
+
+        dump($repository);
+        return $this->render('simulations_list.html.twig', [
+            'simulations' => $simulations
+        ]);
     }
 
     /**

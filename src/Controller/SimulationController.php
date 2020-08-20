@@ -18,6 +18,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SimulationController extends AbstractController
 {
@@ -26,11 +28,13 @@ class SimulationController extends AbstractController
      */
     public function newSimulation(EntityManagerInterface $em, Request $request)
     {
-        $form = $this->createForm(SimulationFormType::class);
+        $simulation = new Simulation();
+
+        $form = $this->createForm(SimulationFormType::class, $simulation);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            /** @var Simulation $simulation */
+           // /** @var Simulation $simulation */
             $simulation = $form->getData();
             $session = $request->getSession();
             $session->set('simulation', $simulation);
@@ -39,7 +43,7 @@ class SimulationController extends AbstractController
             return $this->redirectToRoute('app_first_needs');
         }
 
-        return $this->render('new_simulation.html.twig', [
+        return $this->render('simulation/new_simulation.html.twig', [
             'simulationForm'=>$form->createView(),
         ]);
     }
@@ -47,14 +51,21 @@ class SimulationController extends AbstractController
     /**
      * @Route("/first_needs", name="app_first_needs")
      */
-    public function firstNeeds(EntityManagerInterface $em, Request $request)
+    public function firstNeeds(EntityManagerInterface $em, Request $request, UserInterface $user)
     {
         if ($request->getSession()->get('simulation')) {
-            $form = $this->createForm(FirstNeedsFormType::class);
+            $test=$request->getSession()->get('simulation');
+            $user=$user->getId();
+            dump($user);
+            dump($test);
+
+            $firstNeeds = new FirstNeeds();
+
+            $form = $this->createForm(FirstNeedsFormType::class, $firstNeeds);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                /** @var FirstNeeds $firstNeeds */
+               // /** @var FirstNeeds $firstNeeds */
                 $firstNeeds = $form->getData();
                 $session = $request->getSession();
                 $session->set('firstNeeds', $firstNeeds);
@@ -62,7 +73,7 @@ class SimulationController extends AbstractController
                 // $this->addFlash();
                 return $this->redirectToRoute('app_turnover');
             }
-            return $this->render('first_needs.html.twig', [
+            return $this->render('simulation/first_needs.html.twig', [
                 'firstNeedsForm' => $form->createView(),
             ]);
         }
@@ -75,11 +86,13 @@ class SimulationController extends AbstractController
     public function turnover(EntityManagerInterface $em, Request $request)
     {
         if ($request->getSession()->get('firstNeeds')) {
-            $form = $this->createForm(TurnoverFormType::class);
+
+            $turnover = new Turnover();
+            $form = $this->createForm(TurnoverFormType::class, $turnover);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                /** @var Turnover $turnover */
+                ///** @var Turnover $turnover */
                 $turnover = $form->getData();
                 $session = $request->getSession();
                 $session->set('turnover', $turnover);
@@ -87,7 +100,7 @@ class SimulationController extends AbstractController
                 // $this->addFlash();
                 return $this->redirectToRoute('app_incomes');
             }
-            return $this->render('turnover.html.twig', [
+            return $this->render('simulation/turnover.html.twig', [
                 'turnoverForm' => $form->createView(),
             ]);
         }
@@ -101,11 +114,14 @@ class SimulationController extends AbstractController
     public function incomes(EntityManagerInterface $em, Request $request)
     {
         if ($request->getSession()->get('turnover')) {
-            $form = $this->createForm(IncomesFormType::class);
+
+            $incomes = new Incomes();
+
+            $form = $this->createForm(IncomesFormType::class, $incomes);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                /** @var Incomes $incomes */
+               // /** @var Incomes $incomes */
                 $incomes = $form->getData();
                 $session = $request->getSession();
                 $session->set('incomes', $incomes);
@@ -113,7 +129,7 @@ class SimulationController extends AbstractController
                 // $this->addFlash();
                 return $this->redirectToRoute('app_costs');
             }
-            return $this->render('incomes.html.twig', [
+            return $this->render('simulation/incomes.html.twig', [
                 'incomesForm' => $form->createView(),
             ]);
         }
@@ -126,11 +142,14 @@ class SimulationController extends AbstractController
     public function costs(EntityManagerInterface $em, Request $request)
     {
         if ($request->getSession()->get('incomes')) {
-            $form = $this->createForm(CostsFormType::class);
+
+            $costs = new Costs();
+
+            $form = $this->createForm(CostsFormType::class, $costs);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                /** @var Costs $costs */
+               // /** @var Costs $costs */
                 $costs = $form->getData();
                 $session = $request->getSession();
                 $session->set('costs', $costs);
@@ -138,7 +157,7 @@ class SimulationController extends AbstractController
                 // $this->addFlash();
                 return $this->redirectToRoute('app_checking');
             }
-            return $this->render('costs.html.twig', [
+            return $this->render('simulation/costs.html.twig', [
                 'costsForm' => $form->createView(),
             ]);
         }
@@ -151,9 +170,9 @@ class SimulationController extends AbstractController
     public function checking(Request $request)
     {
         if($request->getSession()->get('costs')) {
-            return $this->render('checking.html.twig');
+            return $this->render('simulation/checking.html.twig');
         }
-        return $this->redirectToRoute('app_new_simulation_bis');
+        return $this->redirectToRoute('app_new_simulation');
     }
 
     /**
@@ -161,13 +180,34 @@ class SimulationController extends AbstractController
      */
     public function flush(EntityManagerInterface $em, Request $request)
     {
-        if($request->getSession()->get('charges')) {
+        if($request->getSession()->get('costs')) {
 
             $simulation = $request->getSession()->get('simulation');
+            $simulation->setUserId($this->getUser());
+            $simulation->setCreatedAt(new \DateTime('now'));
+            $simulation->setState('1');
+
+            /** @var Simulation $simulation */
             $firstNeeds = $request->getSession()->get('firstNeeds');
+            $firstNeeds->setSimulation($simulation);
+
+            /** @var Simulation $simulation */
             $turnover = $request->getSession()->get('turnover');
+            $turnover->setSimulation($simulation);
+
+            /** @var Simulation $simulation */
             $incomes = $request->getSession()->get('incomes');
+            $incomes->setSimulation($simulation);
+
+            /** @var Simulation $simulation */
             $costs = $request->getSession()->get('costs');
+            $costs->setSimulation($simulation);
+
+
+            dump($simulation);
+            dump($firstNeeds);
+
+
 
             $em->persist($simulation);
             $em->persist($firstNeeds);
@@ -181,7 +221,7 @@ class SimulationController extends AbstractController
             $request->getSession()->remove('firstNeeds');
             $request->getSession()->remove('turnover');
             $request->getSession()->remove('incomes');
-            $request->getSession()->remove('charges');
+            $request->getSession()->remove('costs');
 
             return $this->redirectToRoute('app_simulation_view');
         }
@@ -194,7 +234,6 @@ class SimulationController extends AbstractController
      */
     public function simulationView()
     {
-        
-        return $this->redirectToRoute('app_homepage');
+        return $this->redirectToRoute('app_simulation_view');
     }
 }

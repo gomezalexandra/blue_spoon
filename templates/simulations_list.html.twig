@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} All simulations {% endblock %}
+
+{% block body %}
+
+    <p>Mes Simulation</p>
+
+    {% for simulation in simulations %}
+        simulation numéro: {{ simulation.id }}
+        {{ simulation.createdAt|date('d/m/Y') }}
+        {{ simulation.name }} </br>
+    {% endfor %}
+    
+{% endblock %}
