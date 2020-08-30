@@ -19,6 +19,8 @@
                 <div class="row">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <h2 class="col-12 d-flex align-items-center justify-content-center subtitle"> Vous êtes connecté en tant que : {{ app.user.name }}. </h2>
+                        <p>Envoyer un email test</p>
+                        <a href="{{ path('app_email') }}">cliquer ici ! </a>
                     {% endif %}
 
 

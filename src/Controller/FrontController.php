@@ -10,7 +10,10 @@ use App\Entity\Turnover;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
-use App\Object\IncomeStatement;
+use App\Repository\CostsRepository;
+use App\Repository\SimulationRepository;
+use App\Repository\TurnoverRepository;
+use App\Service\IncomeStatement;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,38 +92,19 @@ class FrontController extends AbstractController
     /**
      * @Route("/simulation_view/{slug}", name="app_simulation_view")
      */
-    public function simulationView($slug, EntityManagerInterface $em) {
+    public function simulationView($slug, IncomeStatement $incomeStatement, SimulationRepository $simulationRepository, TurnoverRepository $turnoverRepository, CostsRepository $costsRepository) {
 
-        // Getting simulation from database
-        $repositorySimulation = $em->getRepository(Simulation::class);
-        $repositoryTurnover = $em->getRepository(Turnover::class);
-        $repositoryCost = $em->getRepository(Costs::class);
+        $simulation = $simulationRepository->find($slug);
 
-        /**@var Simulation $simulations */
-        $simulation = $repositorySimulation->find($slug);
+        $result = $incomeStatement->calculate($slug);
 
-        /** @var Turnover $turnover */
-        $turnover = $repositoryTurnover->findOneBy(['simulation' => $slug]);
-
-        /** @var Costs $cost */
-        $cost = $repositoryCost->findOneBy(['simulation' => $slug]);
-
-        if (!$simulation || !$turnover) {
+        if (!$simulation || !$result['turnover']) {
             throw $this->createNotFoundException(sprintf('No simulation or turnover')); //TODO
         }
 
-        $incomeStatement = new IncomeStatement();
-        $incomeStatement->calculate($turnover, $cost);
-
-
         return $this->render('simulation_view.html.twig', [
             'simulation' => $simulation,
-            'cost' => $cost,
-            'turnover' => $turnover,
-            'turnover1' => $incomeStatement->getTurnover1(),
-            'turnover2' => $incomeStatement->getTurnover2(),
-            'variableCosts1' => $incomeStatement->getVariableCost1(),
-            'variableCosts2' => $incomeStatement->getVariableCost2(),
+            'result' => $result,
         ]);
     }
 
