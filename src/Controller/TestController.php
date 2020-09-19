@@ -4,6 +4,10 @@
 namespace App\Controller;
 
 
+use App\Repository\CostsRepository;
+use App\Repository\SimulationRepository;
+use App\Repository\TurnoverRepository;
+use App\Service\IncomeStatement;
 use ContainerSOau8kM\getMailer_TransportFactory_SendgridService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,10 +21,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/email", name="app_email")
+     * @Route("/email/{slug}", name="app_email")
      */
-    public function email(MailerInterface $mailer)
+    public function email($slug, MailerInterface $mailer, IncomeStatement $incomeStatement, SimulationRepository $simulationRepository, TurnoverRepository $turnoverRepository, CostsRepository $costsRepository)
     {
+        $simulation = $simulationRepository->find($slug);
+
+        $result = $incomeStatement->calculate($slug);
+
+        if (!$simulation || !$result['turnover']) {
+            throw $this->createNotFoundException(sprintf('No simulation or turnover')); //TODO
+        }
 
         $email = (new TemplatedEmail())
             ->from('alexandragomez.work@gmail.com')
@@ -28,7 +39,13 @@ class TestController extends AbstractController
             ->subject('Thanks for signing up!')
 
             // path of the Twig template to render
-            ->htmlTemplate('emails/signup.html.twig');
+            ->htmlTemplate('emails/signup.html.twig')
+
+            // pass variables (name => value) to the template
+            ->context([
+                'simulation' => $simulation,
+                'result' => $result,
+            ]);
 
 
         $mailer->send($email);

@@ -3,94 +3,111 @@
 {% block title %} Simulation view {% endblock %}
 
 {% block body %}
-
-   <p>test simulation view</p>
-
-   <p>Détail de la simulation {{ simulation.name }} créée le {{ simulation.createdAt|format_datetime(locale='fr') }}. </br>
-
-   <h2>Compte de résultat</h2>
-
-   <table>
-      <tr>
-         <td></td>
-         <td>Année 1</td>
-         <td>Année 2</td>
-      </tr>
-      <tr>
-         <td>chiffre d'affaire HT</td>
-         <td>{{ result.turnover1 }}</td>
-         <td>{{ result.turnover2 }}</td>
-      </tr>
-      <tr>
-         <td><h4>Total produits d'exploitation :</h4></td>
-         <td>{{ result.turnover1 }}</td>
-         <td>{{ result.turnover2 }}</td>
-      </tr>
-      <tr>
-         <td>Charges variables (dont achats consommés)</td>
-         <td>{{ result.variableCosts1 }}</td>
-         <td>{{ result.variableCosts2 }}</td>
-      </tr>
-      <tr>
-         <td>Impôts, taxes et versements assimilés</td>
-         <td>{{ result.cost.taxes }}</td>
-         <td>{{ result.cost.taxes }}</td>
-      </tr>
-      <tr>
-         <td>Salaires et charges sociales</td>
-         <td>{{ result.cost.salaries }}</td>
-         <td>{{ simulation.name }}</td>
-      </tr>
-      <tr>
-         <td>Loyer</td>
-         <td>{{ result.cost.rent }}</td>
-         <td>{{ result.cost.rent }}</td>
-      </tr>
-      <tr>
-         <td>Insurance</td>
-         <td>{{ result.cost.insurance }}</td>
-         <td>{{ result.cost.insurance }}</td>
-      </tr>
-      <tr>
-         <td>Autres coûts fixes</td>
-         <td>{{ result.cost.othersFixedCosts }}</td>
-         <td>{{ result.cost.othersFixedCosts }}</td>
-      </tr>
-      <tr>
-         <td><h4>Total charges d'exploitation :</h4></td>
-         <td>{{ simulation.name }}</td>
-         <td>{{ simulation.name }}</td>
-      </tr>
-      <tr>
-         <td><h3>Résultat d'exploitation</h3></td>
-         <td>{{ simulation.name }}</td>
-         <td>{{ simulation.name }}</td>
-      </tr>
-      <tr>
-         <td><h3>Résultat courant avant impôt</h3></td>
-         <td>{{ simulation.name }}</td>
-         <td>{{ simulation.name }}</td>
-      </tr>
-      <tr>
-         <td>Impôt sur les bénéfices</td>
-         <td>{{ result.cost.corporationTax }}</td>
-         <td>{{ simulation.name }}</td>
-      </tr>
-      <tr>
-         <td><h3>Bénéfice ou Perte</h3></td>
-         <td>{{ simulation.name }}</td>
-         <td>{{ simulation.name }}</td>
-      </tr>
+   <div class="row d-flex justify-content-center">
+      <h2>Détails de la simulation {{ simulation.name }}</h2>
+   </div>
+    <div class="row d-flex justify-content-center">
+      <p>Créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</p>
+   </div>
+   <div class="row d-flex justify-content-center">
+      <a href="{{ path('app_email', { slug: simulation.id }) }}">
+         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+         </svg>
+         Ma Simulation par mail!
+      </a>
+   </div>
 
 
-   </table>
+   <div class="row d-flex justify-content-center">
+      <h2>Compte de résultat</h2>
+   </div>
 
+   <div class="row d-flex justify-content-center">
+      <table>
+         <tr>
+            <td></td>
+            <td>Année 1</td>
+            <td>Année 2</td>
+         </tr>
+         <tr>
+            <td>chiffre d'affaire HT</td>
+            <td>{{ result.turnover1 }}</td>
+            <td>{{ result.turnover2 }}</td>
+         </tr>
+         <tr>
+            <td>Total produits d'exploitation :</td>
+            <td>{{ result.turnover1 }}</td>
+            <td>{{ result.turnover2 }}</td>
+         </tr>
+         <tr>
+            <td>Charges variables (dont achats consommés)</td>
+            <td>{{ result.variableCosts1 }}</td>
+            <td>{{ result.variableCosts2 }}</td>
+         </tr>
+         <tr>
+            <td>Impôts, taxes et versements assimilés</td>
+            <td>{{ result.cost.taxes }}</td>
+            <td>{{ result.cost.taxes }}</td>
+         </tr>
+         <tr>
+            <td>Salaires et charges sociales</td>
+            <td>{{ result.cost.salaries }}</td>
+            <td>{{ simulation.name }}</td>
+         </tr>
+         <tr>
+            <td>Loyer</td>
+            <td>{{ result.cost.rent }}</td>
+            <td>{{ result.cost.rent }}</td>
+         </tr>
+         <tr>
+            <td>Insurance</td>
+            <td>{{ result.cost.insurance }}</td>
+            <td>{{ result.cost.insurance }}</td>
+         </tr>
+         <tr>
+            <td>Autres coûts fixes</td>
+            <td>{{ result.cost.othersFixedCosts }}</td>
+            <td>{{ result.cost.othersFixedCosts }}</td>
+         </tr>
+         <tr>
+            <td>Total charges d'exploitation :</td>
+            <td>{{ simulation.name }}</td>
+            <td>{{ simulation.name }}</td>
+         </tr>
+         <tr>
+            <td>Résultat d'exploitation</td>
+            <td>{{ simulation.name }}</td>
+            <td>{{ simulation.name }}</td>
+         </tr>
+         <tr>
+            <td>Résultat courant avant impôt</td>
+            <td>{{ simulation.name }}</td>
+            <td>{{ simulation.name }}</td>
+         </tr>
+         <tr>
+            <td>Impôt sur les bénéfices</td>
+            <td>{{ result.cost.corporationTax }}</td>
+            <td>{{ simulation.name }}</td>
+         </tr>
+         <tr>
+            <td>Bénéfice ou Perte</td>
+            <td>{{ simulation.name }}</td>
+            <td>{{ simulation.name }}</td>
+         </tr>
 
-   <h2>Comparaison revenue/charge</h2>
-   <canvas id="myChart" width="400" height="100"></canvas>
+      </table>
+   </div>
 
-   <h2>Répartition des charges</h2>
-   <canvas id="myDoughnutChart" width="400" height="100"></canvas>
+   <div class="row d-flex justify-content-center">
+      <h2>Comparaison revenue/charge</h2>
+      <canvas id="myChart" width="400" height="100"></canvas>
+   </div>
+
+   <div class="row d-flex justify-content-center">
+      <h2>Répartition des charges</h2>
+      <canvas id="myDoughnutChart" width="400" height="100"></canvas>
+   </div>
 
 {% endblock %}
 

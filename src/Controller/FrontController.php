@@ -8,6 +8,7 @@ use App\Entity\Costs;
 use App\Entity\Simulation;
 use App\Entity\Turnover;
 use App\Entity\User;
+use App\Form\SimulationFormType;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
 use App\Repository\CostsRepository;
@@ -56,18 +57,29 @@ class FrontController extends AbstractController
     /**
      * @Route("/simulations_list", name="app_simulations_list")
      */
-    public function simulationsList(EntityManagerInterface $em)
+    public function simulationsList(EntityManagerInterface $em, Request $request)
     {
+        $form = $this->createForm(SimulationFormType::class);
+        $form->handleRequest($request);
+
         $repository = $em->getRepository(Simulation::class);
         /**@var Simulation $simulations */
         $simulations = $repository->findBy([], ['id' => 'DESC']);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $name = $data->getName();
+            /**@var Simulation $simulations */
+            $simulations = $repository->findBy(['name' => $name],['id' => 'DESC']);
+        }
 
         if (!$simulations) {
             throw $this->createNotFoundException(sprintf('No simulation '));
         }
 
         return $this->render('simulations_list.html.twig', [
-            'simulations' => $simulations
+            'simulations' => $simulations,
+            'simulationForm' => $form->createView(),
         ]);
     }
 

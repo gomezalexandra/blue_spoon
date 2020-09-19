@@ -4,10 +4,31 @@
 
 {% block body %}
 
-    <p>Mes Simulations</p>
+    <div class="blockHead headLarge">
+        <div class="row title">
+            <h1 class="col-12" > Mes Simulations </h1>
+        </div>
+    </div>
 
-    {% for simulation in simulations %}
-        <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}"> Voir {{ simulation.name }} créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
-    {% endfor %}
+    <div class="blueBackground">
+{#TODO class to rename#}
+        <div class="row blockDashboard">
+
+            <div class="col-12 noPadding">
+
+                <p>Rechercher une simulation :</p>
+                {{ form_start(simulationForm) }}
+                {{ form_widget(simulationForm) }}
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+                {{ form_end(simulationForm) }}
+
+                {% for simulation in simulations %}
+                    <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}"> Voir {{ simulation.name }} </br> créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
 
 {% endblock %}
