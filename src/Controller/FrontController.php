@@ -8,6 +8,7 @@ use App\Entity\Costs;
 use App\Entity\Simulation;
 use App\Entity\Turnover;
 use App\Entity\User;
+use App\Form\SearchFormType;
 use App\Form\SimulationFormType;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
@@ -68,7 +69,11 @@ class FrontController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            /*if (!$data) {
+                return;
+            }*/
             $name = $data->getName();
+
             /**@var Simulation $simulations */
             $simulations = $repository->findBy(['name' => $name],['id' => 'DESC']);
         }

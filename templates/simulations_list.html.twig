@@ -2,6 +2,11 @@
 
 {% block title %} All simulations {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/algolia_autocomplete.css') }}">
+{% endblock %}
+
 {% block body %}
 
     <div class="blockHead headLarge">
@@ -16,7 +21,6 @@
 
             <div class="col-12 noPadding">
 
-                <p>Rechercher une simulation :</p>
                 {{ form_start(simulationForm) }}
                 {{ form_widget(simulationForm) }}
                 <button type="submit" class="btn btn-primary">Rechercher</button>
@@ -31,4 +35,10 @@
     </div>
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+    <script src="{{ asset('js/algolia_autocomplete.js') }}"></script>
 {% endblock %}

@@ -12,7 +12,7 @@ class SimulationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', SimulationSelectTextType::class)
             /*->add('created_at')
             ->add('state')
             ->add('user_id')

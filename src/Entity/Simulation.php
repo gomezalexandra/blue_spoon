@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SimulationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SimulationRepository::class)
@@ -25,6 +26,7 @@ class Simulation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("main")
      */
     private $name;
 

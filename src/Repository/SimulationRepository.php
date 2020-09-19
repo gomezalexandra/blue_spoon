@@ -19,6 +19,26 @@ class SimulationRepository extends ServiceEntityRepository
         parent::__construct($registry, Simulation::class);
     }
 
+    /**
+     * @return  Simulation[]
+     */
+    public function findAllSimulationsMatching(string $query)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.name LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+    /*{
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.name', 'ASC')
+            ->getQuery()
+            ->execute()
+            ;
+    }*/
+
     // /**
     //  * @return Simulation[] Returns an array of Simulation objects
     //  */
