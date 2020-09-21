@@ -20,7 +20,7 @@ class SimulationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return  Simulation[]
+     * @return Simulation[]
      */
     public function findAllSimulationsMatching(string $query)
     {

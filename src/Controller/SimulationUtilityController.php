@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SimulationUtilityController extends AbstractController
 {
     /**
-     * @Route("/utility/simulations", methods="GET", name="utility_simulations")
+     * @Route("/utility/simulations", methods="GET", name="app_utility_simulations")
      */
     public function getSimulationsApi(SimulationRepository $simulationRepository, Request $request)
     {
@@ -23,4 +23,5 @@ class SimulationUtilityController extends AbstractController
             'simulations' => $simulations
         ], 200, [],['groups' => ['main']]);
     }
+
 }

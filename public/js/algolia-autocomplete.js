@@ -11,9 +11,24 @@ $(document).ready(function() {
                         cb(data.simulations);
                     });
                 },
-                displayKey: 'name',
+                displayKey: "name",
                 debounce: 500
             }
         ]);
     });
 });
+
+/*
+$(document).ready(function() {
+    $('.js-user-autocomplete').autocomplete({hint: false}, [
+        {
+            source: function(query, cb) {
+                cb([
+                    {value: 'foo'},
+                    {value: 'bar'}
+                ])
+            }
+        }
+    ]);
+});
+ */

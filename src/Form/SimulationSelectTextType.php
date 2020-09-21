@@ -32,10 +32,9 @@ class SimulationSelectTextType extends AbstractType
             'invalid_message' => 'Simulation not found!',
             'attr' => [
                 'class' => 'js_simulation_autocomplete',
-                'data-autocomplete-url' => $this->router->generate('utility_simulations')
+                'data-autocomplete-url' => $this->router->generate("app_utility_simulations")
             ],
 
         ]);
-
     }
 }
