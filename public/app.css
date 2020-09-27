@@ -2,9 +2,18 @@
     background-color: red;
 }
 
-/* test pour class dans simulation*/
+/* TODO test pour class dans simulation*/
 .form-signin {
     border: 2px solid red;
+}
+
+/* TODO test pour graph dans simulation view*/
+#chartContainer {
+    width: 40%
+}
+
+#myChart2 {
+    width: 40%
 }
 
 @font-face

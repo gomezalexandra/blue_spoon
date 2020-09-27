@@ -53,11 +53,14 @@ class SimulationController extends AbstractController
      */
     public function firstNeeds(EntityManagerInterface $em, Request $request, UserInterface $user)
     {
-        if ($request->getSession()->get('simulation')) {
-            $test=$request->getSession()->get('simulation');
+        if ($request->getSession()->has('simulation')) {
+
+            /* TODO to delete
+            $test=$request->getSession()->has('simulation');
             $user=$user->getId();
             dump($user);
             dump($test);
+            */
 
             $firstNeeds = new FirstNeeds();
 
@@ -85,7 +88,7 @@ class SimulationController extends AbstractController
      */
     public function turnover(EntityManagerInterface $em, Request $request)
     {
-        if ($request->getSession()->get('firstNeeds')) {
+        if ($request->getSession()->has('firstNeeds')) {
 
             $turnover = new Turnover();
             $form = $this->createForm(TurnoverFormType::class, $turnover);
@@ -113,7 +116,7 @@ class SimulationController extends AbstractController
      */
     public function incomes(EntityManagerInterface $em, Request $request)
     {
-        if ($request->getSession()->get('turnover')) {
+        if ($request->getSession()->has('turnover')) {
 
             $incomes = new Incomes();
 
@@ -141,7 +144,7 @@ class SimulationController extends AbstractController
      */
     public function costs(EntityManagerInterface $em, Request $request)
     {
-        if ($request->getSession()->get('incomes')) {
+        if ($request->getSession()->has('incomes')) {
 
             $costs = new Costs();
 
@@ -169,7 +172,7 @@ class SimulationController extends AbstractController
      */
     public function checking(Request $request)
     {
-        if($request->getSession()->get('costs')) {
+        if($request->getSession()->has('costs')) {
             return $this->render('simulation/checking.html.twig');
         }
         return $this->redirectToRoute('app_new_simulation');
@@ -180,7 +183,7 @@ class SimulationController extends AbstractController
      */
     public function flush(EntityManagerInterface $em, Request $request)
     {
-        if($request->getSession()->get('costs')) {
+        if($request->getSession()->has('costs')) {
 
             $simulation = $request->getSession()->get('simulation');
             $simulation->setUserId($this->getUser());

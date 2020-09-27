@@ -22,8 +22,13 @@
             <div class="col-12 noPadding">
 
                 {{ form_start(simulationForm) }}
-                {{ form_widget(simulationForm) }}
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+
+                {{ form_row(simulationForm.name, {
+                    attr: {placeholder: 'Recherchez une simulation' }
+                }) }}
+
+                <button type="submit" class="btn btn-primary">Chercher</button>
+
                 {{ form_end(simulationForm) }}
 
                 {% for simulation in simulations %}

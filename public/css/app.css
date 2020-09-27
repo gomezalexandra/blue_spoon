@@ -2,29 +2,29 @@
 
 @font-face
 {
-    font-family: 'SirinStencil-Regular';
-    src: url('../fonts/SirinStencil-Regular.ttf');
+    font-family: 'BalooTammudu2-Bold';
+    src: url('../fonts/BalooTammudu2-Medium.ttf');
 }
 
 @font-face
 {
-    font-family: 'BioRhyme-Regular';
-    src: url('../fonts/BioRhyme-Regular.ttf');
+    font-family: 'Karla-Regular';
+    src: url('../fonts/Karla-Regular.ttf');
 }
 
 @font-face
 {
-    font-family: 'FredokaOne-Regular';
-    src: url('../fonts/FredokaOne-Regular.ttf');
+    font-family: 'Cabin-VariableFont_wdth';
+    src: url('../fonts/Cabin-VariableFont_wdth.ttf');
 }
 
 body {
     background-color: white;
-    font-family: 'BioRhyme-Regular', arial, sans-serif;
+    font-family: 'Cabin-VariableFont_wdth', arial, sans-serif;
 }
 
 a {
-    font-family: 'BioRhyme-Regular', arial, sans-serif;
+    font-family: 'Karla-Regular', arial, sans-serif;
     text-align: center;
 }
 
@@ -34,18 +34,19 @@ h1, .center{
 
 h1 {
     font-size: 2.7em;
-    font-family: 'SirinStencil-Regular', arial, sans-serif;
+    font-family: 'BalooTammudu2-Bold', arial, sans-serif;
     color: white;
 }
 
 h2 {
-    font-family: 'BioRhyme-Regular', arial, sans-serif;
+    font-family: 'Karla-Regular', arial, sans-serif;
     margin: 0px;
 }
 
 h3 {
-    font-family: 'FredokaOne-Regular', arial, sans-serif;
+    font-family: 'Karla-Regular', arial, sans-serif;
     margin: 0px;
+    font-weight: bold;
 }
 
 .btn-primary {

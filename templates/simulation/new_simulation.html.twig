@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} nouvelle simulation {% endblock %}
+
+{% block body %}
+
+    {{ form_start(simulationForm) }}
+
+    {{ form_label(simulationForm.name, 'Nom de la simulation') }}
+
+    {{ form_widget(simulationForm.name) }}
+
+    <small>{{ form_help(simulationForm.name) }}</small>
+
+
+
+    <button type="submit" class="btn btn-primary">Créer!</button>
+    {{ form_end(simulationForm) }}
+
+{% endblock %}

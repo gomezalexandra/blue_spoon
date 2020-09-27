@@ -13,8 +13,8 @@ class SimulationFormType extends AbstractType
     {
         $builder
             ->add('name', SimulationSelectTextType::class, [
-                'help' => 'Choose something catchy!',
-                'required' => false,
+                'required' => true,
+                'help' => 'Choisissez un nom pour votre nouvelle simulation',
             ])
             /*->add('created_at')
             ->add('state')
