@@ -3,6 +3,20 @@
 {% block title %} Simulation view {% endblock %}
 
 {% block body %}
+
+   {#
+   <div id="content">
+        <h3>Hello, this is a H3 tag</h3>
+
+       <p>A paragraph</p>
+   </div>
+   <div id="editor"></div>
+   <button id="cmd">generate PDF</button>
+    #}
+
+
+<div id="htmltopdf">
+
    <div class="row d-flex justify-content-center">
       <h2>Détails de la simulation {{ simulation.name }}</h2>
    </div>
@@ -129,6 +143,9 @@
          <h2>Comparaison revenue/charge</h2>
          <canvas id="myChart" width="400" height="100"></canvas>
       </div>
+   </div>
+
+</div>
 
 {% endblock %}
 
@@ -213,116 +230,6 @@
          });
 
 
-      // graph test
-      {# var chartColors = {
-         red: 'rgb(255, 99, 132)',
-         orange: 'rgb(255, 159, 64)',
-         yellow: 'rgb(255, 205, 86)',
-         green: 'rgb(75, 192, 192)',
-         blue: 'rgb(54, 162, 235)',
-         purple: 'rgb(153, 102, 255)',
-         grey: 'rgb(231,233,237)'
-      };
-
-      var randomScalingFactor = function() {
-         return (Math.random() > 0.5 ? 1.0 : 1.0) * Math.round(Math.random() * 100);
-      };
-
-      var data =  {
-         labels: ["Car", "Bike", "Walking"],
-         datasets: [{
-            label: 'Fuel',
-            backgroundColor: [
-               chartColors.red,
-               chartColors.blue,
-               chartColors.yellow],
-            data: [
-               randomScalingFactor(),
-               randomScalingFactor(),
-               randomScalingFactor(),
-            ]
-         }]
-      };
-
-      var myBar = new Chart(document.getElementById("myChart1"), {
-         type: 'horizontalBar',
-         data: data,
-         options: {
-            responsive: true,
-            title: {
-               display: true,
-               text: "Chart.js - Base Example"
-            },
-            tooltips: {
-               mode: 'index',
-               intersect: false
-            },
-            legend: {
-               display: false,
-            },
-            scales: {
-               xAxes: [{
-                  ticks: {
-                     beginAtZero: true
-                  }
-               }]
-            }
-         }
-      });
-
-      var myBar2 = new Chart(document.getElementById("myChart2"), {
-         type: 'horizontalBar',
-         data: data,
-         options: {
-            responsive: true,
-            title: {
-               display: true,
-               text: "Chart.js - Changing X Axis Step Size"
-            },
-            tooltips: {
-               mode: 'index',
-               intersect: false
-            },
-            legend: {
-               display: false,
-            },
-            scales: {
-               xAxes: [{
-                  ticks: {
-                     beginAtZero: true,
-                     stepSize: 2
-                  }
-               }]
-            }
-         }
-      });
-
-      var myBar3 = new Chart(document.getElementById("myChart3"), {
-         type: 'horizontalBar',
-         data: data,
-         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            title: {
-               display: true,
-               text: "Chart.js - Setting maintainAspectRatio = false and Setting Parent Width/Height"
-            },
-            tooltips: {
-               mode: 'index',
-               intersect: false
-            },
-            legend: {
-               display: false,
-            },
-            scales: {
-               xAxes: [{
-                  ticks: {
-                     beginAtZero: true
-                  }
-               }]
-            }
-         }
-      });#}
 
       $('#downloadPdf').click(function(event) {
          // get size of report page
@@ -369,9 +276,21 @@
          pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
 
 
-         // download the pdf
+         // download the canvas in pdf
          pdf.save('graph_pdf.pdf');
+
+         var doc = new jsPDF();
+
+         // download html in pdf
+
+         doc.fromHTML($('#htmltopdf').html(), 15, 15, {
+            'width': 170
+         });
+         doc.save('table-file.pdf');
+
       });
+
+
 
    </script>
 {% endblock %}
