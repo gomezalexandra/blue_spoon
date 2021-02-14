@@ -4,11 +4,26 @@
 
 {% block body %}
 
-    {{ form_start(turnoverForm) }}
+    <div class="blockHead headMedium">
+        <div class="row title">
+            <h1 class="col-12" > Nouvelle Simulation </h1>
+        </div>
+    </div>
 
-    {{ form_widget(turnoverForm) }}
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-12 ">
+            <h2>Mon chiffre d'affaire</h2>
+        </div>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Create!</button>
-    {{ form_end(turnoverForm) }}
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-8">
+            {{ form_start(turnoverForm) }}
 
+            {{ form_widget(turnoverForm) }}
+
+            <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
+            {{ form_end(turnoverForm) }}
+        </div>
+    </div>
 {% endblock %}

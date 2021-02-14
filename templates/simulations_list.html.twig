@@ -16,26 +16,41 @@
     </div>
 
     <div class="blueBackground">
-{#TODO class to rename#}
-        <div class="row blockDashboard">
 
-            <div class="col-12 noPadding">
+{#TODO class to rename + check bootstrap margin#}
 
-                {{ form_start(simulationForm) }}
+    <div class="row blockDashboard">
 
-                {{ form_row(simulationForm.name, {
-                    attr: {placeholder: 'Recherchez une simulation' }
-                }) }}
-
-                <button type="submit" class="btn btn-primary">Chercher</button>
-
-                {{ form_end(simulationForm) }}
-
-                {% for simulation in simulations %}
-                    <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}"> Voir {{ simulation.name }} </br> créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
-                {% endfor %}
-            </div>
+        <div class="col-12 backLink">
+            <a href="{{ path('app_dashboard')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                </svg>
+                Tableau de bord
+            </a>
         </div>
+
+        <div class="col-8 searchForm">
+            {{ form_start(simulationForm) }}
+
+            {{ form_row(simulationForm.name, {
+                attr: {placeholder: 'Recherchez une simulation' }
+            }) }}
+
+            <button type="submit" class="btn btn-primary">Chercher</button>
+
+            {{ form_end(simulationForm) }}
+        </div>
+
+        <div class="col-12">
+                {% for simulation in simulations %}
+                    <div class="simulationListLink" >
+                        <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}"> Voir {{ simulation.name }} </br> créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
+                    </div>
+                {% endfor %}
+        </div>
+
+    </div>
 
     </div>
 

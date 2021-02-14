@@ -4,6 +4,18 @@
 
 {% block body %}
 
+    <div class="blockHead headMedium">
+        <div class="row title">
+            <h1 class="col-12" > Nouvelle Simulation </h1>
+        </div>
+    </div>
+
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-12 ">
+            <h2>Vérification des informations</h2>
+        </div>
+    </div>
+
     {% set costs = app.session.get('costs') %}
     {% set incomes = app.session.get('incomes') %}
 
@@ -14,6 +26,6 @@
     Vos charges variables : {{ charges.variableCharges }} </br>
     Vos charges fixes : {{ charges.fixedcharge }} </br>#}
 
-    <a class="col-xs-2 center" href="{{ path('app_flush') }}">Valider les données!</a> </br>
-    <a class="col-xs-2 center" href="{{ path('app_new_simulation') }}">Modifier!</a>
+    <a class="col-xs-2 center" href="{{ path('app_flush') }}">Valider la simulation</a> </br>
+    <a class="col-xs-2 center" href="{{ path('app_new_simulation') }}">Modifier</a>
 {% endblock %}

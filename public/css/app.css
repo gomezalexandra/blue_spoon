@@ -121,6 +121,10 @@ h3 {
     padding-bottom: 100px;
 }
 
+.headMedium {
+    padding-bottom: 50px;
+}
+
 .homepageButton {
     margin-top: 10px;
 }
@@ -213,6 +217,7 @@ h3 {
 .blueBackground {
     background-color: #D8E5F2;
     padding: 0 20px 0 20px;
+    margin-bottom: -80px;
 }
 
 .subtitle {
@@ -249,7 +254,7 @@ h3 {
 }
 
 /* part simulation */
-.simulationLineGreen {
+.simulationLineGreen { /*TODO To delete?*/
     height: 30px;
     background-color: #aee958;
 }
@@ -257,6 +262,38 @@ h3 {
 .simulationLineOrange {
     height: 30px;
     background-color: #8e4ccd;
+}
+
+.simulationFormBlock {
+    margin: 50px 0px 50px 0;
+}
+.simulationFormButton {
+    margin: 40px 0 20px 0;
+}
+/* part simulation list */
+.simulationListLink {
+    margin: 20px 20px 0 20px;
+}
+
+.backLink {
+    margin: 10px 20px 10px 20px;
+}
+
+.searchForm{
+    margin: 20px;
+}
+
+/* part simulation report */
+.simulationDetails {
+    margin: 20px 0 10px 0;
+}
+
+.simulationDownload {
+    margin: 10px 0 -10px 0;
+}
+
+.simulationReport {
+    margin: 70px 0 50px 0;
 }
 
 /* part planning */

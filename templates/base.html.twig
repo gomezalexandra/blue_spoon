@@ -34,10 +34,10 @@
                             <a class="nav-link" href="{{ path('app_explanation') }}">L'application</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_planning') }}">Planifier</a>
+                            <a class="nav-link" href="{{ path('app_author') }}">L'auteur</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_homepage') }}">Nous contacter</a>
+                            <a class="nav-link" href="{{ path('app_homepage') }}">Contact</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon Compte</a>
@@ -60,9 +60,11 @@
 
         {% block body %}{% endblock %}
 
-            <footer class="row d-flex justify-content-center">
-                <p class="d-flex align-items-center justify-content-center col-12">Site réalisé dans le cadre d'une formation OpenClassrooms</p>
+
+            <footer>
+                <p>Site réalisé dans le cadre d'une formation OpenClassrooms</p>
             </footer>
+
 
         {% block javascripts %}
 

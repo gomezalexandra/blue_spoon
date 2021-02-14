@@ -4,11 +4,29 @@
 
 {% block body %}
 
-    {{ form_start(costsForm) }}
+    <div class="blockHead headMedium">
+        <div class="row title">
+            <h1 class="col-12" > Nouvelle Simulation </h1>
+        </div>
+    </div>
 
-    {{ form_widget(costsForm) }}
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-12 ">
+            <h2>Les charges</h2>
+        </div>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Create!</button>
-    {{ form_end(costsForm) }}
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-8">
+
+            {{ form_start(costsForm) }}
+
+            {{ form_widget(costsForm) }}
+
+            <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
+            {{ form_end(costsForm) }}
+
+        </div>
+    </div>
 
 {% endblock %}

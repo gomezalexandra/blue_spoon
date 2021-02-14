@@ -4,11 +4,28 @@
 
 {% block body %}
 
-    {{ form_start(incomesForm) }}
+    <div class="blockHead headMedium">
+        <div class="row title">
+            <h1 class="col-12" > Nouvelle Simulation </h1>
+        </div>
+    </div>
 
-    {{ form_widget(incomesForm) }}
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-12 ">
+            <h2>Mes revenus</h2>
+        </div>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Create!</button>
-    {{ form_end(incomesForm) }}
+    <div class="row d-flex simulationFormBlock">
+        <div class="col-8">
+
+            {{ form_start(incomesForm) }}
+
+            {{ form_widget(incomesForm) }}
+
+            <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
+            {{ form_end(incomesForm) }}
+        </div>
+    </div>
 
 {% endblock %}

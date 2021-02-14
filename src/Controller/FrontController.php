@@ -49,10 +49,10 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/planning", name="app_planning")
+     * @Route("/author", name="app_author")
      */
     public function planning() {
-        return $this->render('planning.html.twig');
+        return $this->render('author.html.twig');
     }
 
     /**
