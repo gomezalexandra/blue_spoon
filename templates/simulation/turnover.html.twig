@@ -16,11 +16,29 @@
         </div>
     </div>
 
+    {% if app.session.get('turnover') is null %}
+        {% set monthWorked = "Mon besoin de démarrage" %}
+        {% set daysWorked = "Mon investissement initial" %}
+        {% set dailyRevenue = "La dépréciation annuelle" %}
+        {% set turnoverIncrease = "Mon stock de démarrage" %}
+    {% else %}
+        {% set monthWorked = app.session.get('turnover').monthWorked %}
+        {% set daysWorked = app.session.get('turnover').daysWorked %}
+        {% set dailyRevenue = app.session.get('turnover').dailyRevenue %}
+        {% set turnoverIncrease = app.session.get('turnover').turnoverIncrease %}
+    {% endif %}
+
     <div class="row d-flex simulationFormBlock">
         <div class="col-8">
             {{ form_start(turnoverForm) }}
 
-            {{ form_widget(turnoverForm) }}
+            {{ form_row(turnoverForm.month_worked, {'value': monthWorked}) }}
+            {{ form_row(turnoverForm.days_worked, {'value': daysWorked}) }}
+            {{ form_row(turnoverForm.daily_revenue, {'value': dailyRevenue}) }}
+            {{ form_row(turnoverForm.turnover_increase, {'value': turnoverIncrease}) }}
+
+            {#  {{ form_widget(turnoverForm) }} #}
+
 
             <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
             {{ form_end(turnoverForm) }}

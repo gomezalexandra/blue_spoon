@@ -16,12 +16,33 @@
         </div>
     </div>
 
+    {% if app.session.get('firstNeeds') is null %}
+        {% set startingCash = "Mon besoin de démarrage" %}
+        {% set startingInvestment = "Mon investissement initial" %}
+        {% set depreciation = "La dépréciation annuelle" %}
+        {% set startingStock = "Mon stock de démarrage" %}
+        {% set othersNeeds = "Mes autrees besoins" %}
+    {% else %}
+        {% set startingCash = app.session.get('firstNeeds').startingCash %}
+        {% set startingInvestment = app.session.get('firstNeeds').startingInvestment %}
+        {% set depreciation = app.session.get('firstNeeds').depreciation %}
+        {% set startingStock = app.session.get('firstNeeds').startingStock %}
+        {% set othersNeeds = app.session.get('firstNeeds').othersNeeds %}
+    {% endif %}
+
+
     <div class="row d-flex simulationFormBlock">
         <div class="col-8">
 
             {{ form_start(firstNeedsForm) }}
 
-            {{ form_widget(firstNeedsForm) }}
+            {{ form_row(firstNeedsForm.starting_cash, {'value': startingCash}) }}
+            {{ form_row(firstNeedsForm.starting_investment, {'value': startingInvestment}) }}
+            {{ form_row(firstNeedsForm.depreciation, {'value': depreciation}) }}
+            {{ form_row(firstNeedsForm.starting_stock, {'value': startingStock}) }}
+            {{ form_row(firstNeedsForm.others_needs, {'value': othersNeeds}) }}
+
+            {#  {{ form_widget(firstNeedsForm) }} #}
 
             <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
             {{ form_end(firstNeedsForm) }}

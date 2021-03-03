@@ -16,13 +16,23 @@
         </div>
     </div>
 
+    {{ dump(app.session) }}
+
+    {% if app.session.get('simulation') is null %}
+        {% set simulationName = "nom de la simulation" %}
+    {% else %}
+        {% set simulationName = app.session.get('simulation').name %}
+    {% endif %}
+
     <div class="row d-flex simulationFormBlock">
         <div class="col-8">
             {{ form_start(simulationForm) }}
 
             {{ form_label(simulationForm.name, 'Nom de la simulation') }}
 
-            {{ form_widget(simulationForm.name) }}
+            {{ form_row(simulationForm.name, {'value': simulationName}) }}
+
+           {# {{ form_widget(simulationForm.name) }} #}
 
             <small>{{ form_help(simulationForm.name) }}</small>
 

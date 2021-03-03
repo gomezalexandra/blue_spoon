@@ -16,12 +16,42 @@
         </div>
     </div>
 
+    {% if app.session.get('costs') is null %}
+        {% set salaries = "Mon prêt bancaire" %}
+        {% set salariesIncrease = "Mon prêt bancaire" %}
+        {% set rent = "Mon apport personnel financier" %}
+        {% set insurance = "Mon apport personnel en nature" %}
+        {% set othersFixedCosts = "Mon besoin de démarrage" %}
+        {% set variableCosts = "Mon besoin de démarrage" %}
+        {% set taxes = "Mon besoin de démarrage" %}
+        {% set corporationTax = "Mon besoin de démarrage" %}
+    {% else %}
+        {% set salaries = app.session.get('costs').salaries %}
+        {% set salariesIncrease = app.session.get('costs').salariesIncrease %}
+        {% set rent = app.session.get('costs').rent %}
+        {% set insurance = app.session.get('costs').insurance %}
+        {% set othersFixedCosts = app.session.get('costs').othersFixedCosts %}
+        {% set variableCosts = app.session.get('costs').variableCosts %}
+        {% set taxes = app.session.get('costs').taxes %}
+        {% set corporationTax = app.session.get('costs').corporationTax %}
+
+    {% endif %}
+
     <div class="row d-flex simulationFormBlock">
         <div class="col-8">
 
             {{ form_start(costsForm) }}
 
-            {{ form_widget(costsForm) }}
+            {{ form_row(costsForm.salaries, {'value': salaries}) }}
+            {{ form_row(costsForm.salaries_increase, {'value': salariesIncrease}) }}
+            {{ form_row(costsForm.rent, {'value': rent}) }}
+            {{ form_row(costsForm.insurance, {'value': insurance}) }}
+            {{ form_row(costsForm.others_fixed_costs, {'value': othersFixedCosts}) }}
+            {{ form_row(costsForm.variable_costs, {'value': variableCosts}) }}
+            {{ form_row(costsForm.taxes, {'value': taxes}) }}
+            {{ form_row(costsForm.corporation_tax, {'value': corporationTax}) }}
+
+            {# {{ form_widget(costsForm) }} #}
 
             <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
             {{ form_end(costsForm) }}

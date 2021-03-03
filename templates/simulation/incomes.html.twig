@@ -16,12 +16,33 @@
         </div>
     </div>
 
+
+    {% if app.session.get('incomes') is null %}
+        {% set bankLoan = "Mon prêt bancaire" %}
+        {% set personnalContribution = "Mon apport personnel financier" %}
+        {% set contributionInKind = "Mon apport personnel en nature" %}
+        {% set startingGrant = "Mon besoin de démarrage" %}
+        {% set othersIncomes = "Mon besoin de démarrage" %}
+    {% else %}
+        {% set bankLoan = app.session.get('incomes').bankLoan %}
+        {% set personnalContribution = app.session.get('incomes').personnalContribution %}
+        {% set contributionInKind = app.session.get('incomes').contributionInKind %}
+        {% set startingGrant = app.session.get('incomes').startingGrant %}
+        {% set othersIncomes = app.session.get('incomes').othersIncomes %}
+    {% endif %}
+
     <div class="row d-flex simulationFormBlock">
         <div class="col-8">
 
             {{ form_start(incomesForm) }}
 
-            {{ form_widget(incomesForm) }}
+            {{ form_row(incomesForm.bank_loan, {'value': bankLoan}) }}
+            {{ form_row(incomesForm.personnal_contribution, {'value': personnalContribution}) }}
+            {{ form_row(incomesForm.contribution_in_kind, {'value': contributionInKind}) }}
+            {{ form_row(incomesForm.starting_grant, {'value': startingGrant}) }}
+            {{ form_row(incomesForm.others_incomes, {'value': othersIncomes}) }}
+
+            {# {{ form_widget(incomesForm) }} #}
 
             <button type="submit" class="btn btn-primary simulationFormButton">Suivant</button>
             {{ form_end(incomesForm) }}

@@ -14,20 +14,27 @@ use App\Form\FirstNeedsFormType;
 use App\Form\IncomesFormType;
 use App\Form\SimulationFormType;
 use App\Form\TurnoverFormType;
+use App\Repository\SimulationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class SimulationController extends AbstractController
 {
     /**
-     * @Route("/new_simulation", name="app_new_simulation")
+     * @Route("/new_simulation/{slug?}", name="app_new_simulation")
      */
-    public function newSimulation(EntityManagerInterface $em, Request $request)
+    public function newSimulation($slug, SimulationRepository $simulationRepository, EntityManagerInterface $em, Request $request)
     {
+
+        if ($slug) {
+            //$simulationId = $simulationRepository->find($slug);
+            // replace by appel function editSimulation (slug)
+            $this->editSimulation($slug, $simulationRepository, $em, $request);
+        }
+
         $simulation = new Simulation();
 
         $form = $this->createForm(SimulationFormType::class, $simulation);
@@ -54,13 +61,6 @@ class SimulationController extends AbstractController
     public function firstNeeds(EntityManagerInterface $em, Request $request, UserInterface $user)
     {
         if ($request->getSession()->has('simulation')) {
-
-            /* TODO to delete
-            $test=$request->getSession()->has('simulation');
-            $user=$user->getId();
-            dump($user);
-            dump($test);
-            */
 
             $firstNeeds = new FirstNeeds();
 
@@ -220,10 +220,41 @@ class SimulationController extends AbstractController
             $request->getSession()->remove('incomes');
             $request->getSession()->remove('costs');
 
-            return $this->redirectToRoute('app_simulation_view');
+            return $this->redirectToRoute('app_simulations_list');
         }
 
         return $this->redirectToRoute('app_new_simulation');
     }
 
+    public function editSimulation($slug, SimulationRepository $simulationRepository, EntityManagerInterface $em, Request $request) {
+
+        $simulationRepository = $em->getRepository(Simulation::class);
+        $firstNeedsRepository = $em->getRepository(FirstNeeds::class);
+        $turnoverRepository = $em->getRepository(Turnover::class);
+        $incomesRepository = $em->getRepository(Incomes::class);
+        $costRepository = $em->getRepository(Costs::class);
+
+        /** @var Simulation $simulation */
+        $simulation = $simulationRepository->find($slug);
+
+        /** @var FirstNeeds $firstNeeds */
+        $firstNeeds = $firstNeedsRepository->findOneBy(['simulation' => $slug]);
+
+        /** @var Turnover $turnover */
+        $turnover = $turnoverRepository->findOneBy(['simulation' => $slug]);
+
+        /** @var Incomes $incomes */
+        $incomes = $incomesRepository->findOneBy(['simulation' => $slug]);
+
+        /** @var Costs $costs */
+        $costs = $costRepository->findOneBy(['simulation' => $slug]);
+
+        $session = $request->getSession();
+
+        $session->set('simulation', $simulation);
+        $session->set('firstNeeds', $firstNeeds);
+        $session->set('turnover', $turnover);
+        $session->set('incomes', $incomes);
+        $session->set('costs', $costs);
+    }
 }

@@ -19,12 +19,21 @@
     {% set costs = app.session.get('costs') %}
     {% set incomes = app.session.get('incomes') %}
 
-    {#{{ dump(app.session.get('incomes')) }}#}
+    {{ dump("costs") }}
+    {{ dump(app.session.get('incomes')) }}
 
-    {#Votre CA : {{ incomes.ca }} </br>
-    Vos besoin de démarrage : {{ incomes.firstNeeds }} </br>
-    Vos charges variables : {{ charges.variableCharges }} </br>
-    Vos charges fixes : {{ charges.fixedcharge }} </br>#}
+    Votre prêt bancaire : {{ incomes.bankLoan }} </br>
+
+                {# Votre CA : {{ incomes.ca }} </br>
+                Vos besoin de démarrage : {{ incomes.firstNeeds }} </br>
+
+                {#Vos charges variables : {{ charges.variableCharges }} </br>
+                Vos charges fixes : {{ charges.fixedcharge }} </br>#}
+
+
+
+
+
 
     <a class="col-xs-2 center" href="{{ path('app_flush') }}">Valider la simulation</a> </br>
     <a class="col-xs-2 center" href="{{ path('app_new_simulation') }}">Modifier</a>
