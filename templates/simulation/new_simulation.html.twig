@@ -16,8 +16,6 @@
         </div>
     </div>
 
-    {{ dump(app.session) }}
-
     {% if app.session.get('simulation') is null %}
         {% set simulationName = "nom de la simulation" %}
     {% else %}

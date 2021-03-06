@@ -26,12 +26,12 @@ class SimulationController extends AbstractController
     /**
      * @Route("/new_simulation/{slug?}", name="app_new_simulation")
      */
-    public function newSimulation($slug, SimulationRepository $simulationRepository, EntityManagerInterface $em, Request $request)
+    public function newSimulation($slug, EntityManagerInterface $em, Request $request)
     {
+        // TODO clear session
 
         if ($slug) {
-
-            $this->editSimulation($slug, $simulationRepository, $em, $request);
+            $this->editSimulation($slug, $em, $request);
         }
 
         $simulation = new Simulation();
@@ -180,40 +180,86 @@ class SimulationController extends AbstractController
     /**
      * @Route("/flush/{slug?}", name="app_flush")
      */
-    public function flush($slug, EntityManagerInterface $em, Request $request)
+    public function flush(EntityManagerInterface $em, Request $request)
     {
         if($request->getSession()->has('costs')) {
 
-            $simulation = $request->getSession()->get('simulation');
-            dump($simulation);
-            $simulation->setUserId($this->getUser());
-            $simulation->setCreatedAt(new \DateTime('now'));
-            $simulation->setState('1'); // TODO 1 = Valid
+            $idSimulation = $request->getSession()->get('idSimulation');
 
-            /** @var Simulation $simulation */
-            $firstNeeds = $request->getSession()->get('firstNeeds');
-            $firstNeeds->setSimulation($simulation);
+            if ($idSimulation == null) {
+                $simulation = $request->getSession()->get('simulation');
+                $simulation->setUserId($this->getUser());
+                $simulation->setCreatedAt(new \DateTime('now'));
+                $simulation->setState('1'); // TODO 1 = Valid
 
-            /** @var Simulation $simulation */
-            $turnover = $request->getSession()->get('turnover');
-            $turnover->setSimulation($simulation);
+                /** @var Simulation $simulation */
+                // TODO check if better => /** @var FirstNeeds $firstNeedsSession */
+                $firstNeedsSession = $request->getSession()->get('firstNeeds');
+                $firstNeedsSession->setSimulation($simulation);
 
-            /** @var Simulation $simulation */
-            $incomes = $request->getSession()->get('incomes');
-            $incomes->setSimulation($simulation);
+                /** @var Simulation $simulation */
+                $turnover = $request->getSession()->get('turnover');
+                $turnover->setSimulation($simulation);
 
-            /** @var Simulation $simulation */
-            $costs = $request->getSession()->get('costs');
-            $costs->setSimulation($simulation);
+                /** @var Simulation $simulation */
+                $incomes = $request->getSession()->get('incomes');
+                $incomes->setSimulation($simulation);
 
-            $em->persist($simulation);
-            $em->persist($firstNeeds);
-            $em->persist($turnover);
-            $em->persist($incomes);
-            $em->persist($costs);
+                /** @var Simulation $simulation */
+                $costs = $request->getSession()->get('costs');
+                $costs->setSimulation($simulation);
+
+                $em->persist($simulation);
+                $em->persist($firstNeedsSession);
+                $em->persist($turnover);
+                $em->persist($incomes);
+                $em->persist($costs);
+
+            } else {
+                /** @var Simulation $simulationSession */
+                $simulationSession = $request->getSession()->get('simulation');
+                /** @var Simulation $simulationBDD */
+                $simulationBDD = $em->getRepository(Simulation::class)->find($idSimulation);
+                $simulationBDD->setName($simulationSession->getName());
+
+                /** @var FirstNeeds $firstNeedsSession */
+                $firstNeedsSession = $request->getSession()->get('firstNeeds');
+
+                /** @var FirstNeeds $firstNeedsBDD */
+                $firstNeedsBDD = $em->getRepository(FirstNeeds::class)->findOneBy(['simulation' => $idSimulation]);
+                $firstNeedsBDD->setStartingCash($firstNeedsSession->getStartingCash());
+                $firstNeedsBDD->setDepreciation($firstNeedsSession->getDepreciation());
+                $firstNeedsBDD->setStartingInvestment($firstNeedsSession->getStartingInvestment());
+                $firstNeedsBDD->setStartingStock($firstNeedsSession->getStartingStock());
+                $firstNeedsBDD->setOthersNeeds($firstNeedsSession->getOthersNeeds());
+
+
+                /** @var Turnover $turnoverSession */
+                $turnoverSession = $request->getSession()->get('turnover');
+                /** @var Turnover $turnoverBDD */
+                $turnoverRepository = $em->getRepository(Turnover::class);
+                $turnoverBDD = $turnoverRepository->findOneBy(['simulation' => $idSimulation]);
+
+                /** @var Incomes $incomesSession */
+                $incomesSession = $request->getSession()->get('incomes');
+                /** @var Incomes $incomesBDD */
+                $incomesRepository = $em->getRepository(Incomes::class);
+                $incomesBDD = $incomesRepository->findOneBy(['simulation' => $idSimulation]);
+
+                /** @var Costs $costsSession */
+                $costsSession = $request->getSession()->get('costs');
+                /** @var Costs $costsBDD */
+                $costRepository = $em->getRepository(Costs::class);
+                $costsBDD = $costRepository->findOneBy(['simulation' => $idSimulation]);
+
+            }
 
             $em->flush();
 
+            // TODO check this
+            if ($idSimulation != null) {
+                $request->getSession()->remove('idSimulation');
+            }
             $request->getSession()->remove('simulation');
             $request->getSession()->remove('firstNeeds');
             $request->getSession()->remove('turnover');
@@ -226,7 +272,7 @@ class SimulationController extends AbstractController
         return $this->redirectToRoute('app_new_simulation');
     }
 
-    public function editSimulation($slug, SimulationRepository $simulationRepository, EntityManagerInterface $em, Request $request) {
+    public function editSimulation($slug, EntityManagerInterface $em, Request $request) {
 
         $simulationRepository = $em->getRepository(Simulation::class);
         $firstNeedsRepository = $em->getRepository(FirstNeeds::class);
@@ -251,6 +297,7 @@ class SimulationController extends AbstractController
 
         $session = $request->getSession();
 
+        $session->set('idSimulation', $slug);
         $session->set('simulation', $simulation);
         $session->set('firstNeeds', $firstNeeds);
         $session->set('turnover', $turnover);

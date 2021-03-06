@@ -19,8 +19,14 @@
     {% set costs = app.session.get('costs') %}
     {% set incomes = app.session.get('incomes') %}
 
-    {{ dump("costs") }}
+    {{ dump(app.session.get('idSimulation')) }}
+    {{ dump(app.session.get('user')) }}
+    {{ dump(app.session.get('simulation')) }}
+    {{ dump(app.session.get('firstNeeds')) }}
+    {{ dump(app.session.get('turnover')) }}
     {{ dump(app.session.get('incomes')) }}
+    {{ dump(app.session.get('costs')) }}
+
 
     Votre prêt bancaire : {{ incomes.bankLoan }} </br>
 
