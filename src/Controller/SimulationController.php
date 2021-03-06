@@ -30,8 +30,7 @@ class SimulationController extends AbstractController
     {
 
         if ($slug) {
-            //$simulationId = $simulationRepository->find($slug);
-            // replace by appel function editSimulation (slug)
+
             $this->editSimulation($slug, $simulationRepository, $em, $request);
         }
 
@@ -47,7 +46,7 @@ class SimulationController extends AbstractController
             $session->set('simulation', $simulation);
 
             //  $this->addFlash();
-            return $this->redirectToRoute('app_first_needs');
+            return $this->redirectToRoute('app_first_needs', array('slug' => $slug));
         }
 
         return $this->render('simulation/new_simulation.html.twig', [
@@ -56,9 +55,9 @@ class SimulationController extends AbstractController
     }
 
     /**
-     * @Route("/first_needs", name="app_first_needs")
+     * @Route("/first_needs/{slug?}", name="app_first_needs")
      */
-    public function firstNeeds(EntityManagerInterface $em, Request $request, UserInterface $user)
+    public function firstNeeds($slug, EntityManagerInterface $em, Request $request, UserInterface $user)
     {
         if ($request->getSession()->has('simulation')) {
 
@@ -74,19 +73,19 @@ class SimulationController extends AbstractController
                 $session->set('firstNeeds', $firstNeeds);
 
                 // $this->addFlash();
-                return $this->redirectToRoute('app_turnover');
+                return $this->redirectToRoute('app_turnover', array('slug' => $slug));
             }
             return $this->render('simulation/first_needs.html.twig', [
                 'firstNeedsForm' => $form->createView(),
             ]);
         }
-        return $this->redirectToRoute('app_new_simulation');
+        return $this->redirectToRoute('app_new_simulation'); //TODO Passer slug dans la securité avec session
     }
 
     /**
-     * @Route("/turnover", name="app_turnover")
+     * @Route("/turnover/{slug?}", name="app_turnover")
      */
-    public function turnover(EntityManagerInterface $em, Request $request)
+    public function turnover($slug, EntityManagerInterface $em, Request $request)
     {
         if ($request->getSession()->has('firstNeeds')) {
 
@@ -101,7 +100,7 @@ class SimulationController extends AbstractController
                 $session->set('turnover', $turnover);
 
                 // $this->addFlash();
-                return $this->redirectToRoute('app_incomes');
+                return $this->redirectToRoute('app_incomes', array('slug' => $slug));
             }
             return $this->render('simulation/turnover.html.twig', [
                 'turnoverForm' => $form->createView(),
@@ -112,9 +111,9 @@ class SimulationController extends AbstractController
     }
 
     /**
-     * @Route("/incomes", name="app_incomes")
+     * @Route("/incomes/{slug?}", name="app_incomes")
      */
-    public function incomes(EntityManagerInterface $em, Request $request)
+    public function incomes($slug, EntityManagerInterface $em, Request $request)
     {
         if ($request->getSession()->has('turnover')) {
 
@@ -130,7 +129,7 @@ class SimulationController extends AbstractController
                 $session->set('incomes', $incomes);
 
                 // $this->addFlash();
-                return $this->redirectToRoute('app_costs');
+                return $this->redirectToRoute('app_costs', array('slug' => $slug));
             }
             return $this->render('simulation/incomes.html.twig', [
                 'incomesForm' => $form->createView(),
@@ -140,9 +139,9 @@ class SimulationController extends AbstractController
     }
 
     /**
-     * @Route("/costs", name="app_costs")
+     * @Route("/costs/{slug?}", name="app_costs")
      */
-    public function costs(EntityManagerInterface $em, Request $request)
+    public function costs($slug, EntityManagerInterface $em, Request $request)
     {
         if ($request->getSession()->has('incomes')) {
 
@@ -158,7 +157,7 @@ class SimulationController extends AbstractController
                 $session->set('costs', $costs);
 
                 // $this->addFlash();
-                return $this->redirectToRoute('app_checking');
+                return $this->redirectToRoute('app_checking', array('slug' => $slug));
             }
             return $this->render('simulation/costs.html.twig', [
                 'costsForm' => $form->createView(),
@@ -168,27 +167,28 @@ class SimulationController extends AbstractController
     }
 
     /**
-     * @Route("/checking", name="app_checking")
+     * @Route("/checking/{slug?}", name="app_checking")
      */
-    public function checking(Request $request)
+    public function checking($slug, Request $request)
     {
         if($request->getSession()->has('costs')) {
-            return $this->render('simulation/checking.html.twig');
+            return $this->render('simulation/checking.html.twig', array('slug' => $slug));
         }
         return $this->redirectToRoute('app_new_simulation');
     }
 
     /**
-     * @Route("/flush", name="app_flush")
+     * @Route("/flush/{slug?}", name="app_flush")
      */
-    public function flush(EntityManagerInterface $em, Request $request)
+    public function flush($slug, EntityManagerInterface $em, Request $request)
     {
         if($request->getSession()->has('costs')) {
 
             $simulation = $request->getSession()->get('simulation');
+            dump($simulation);
             $simulation->setUserId($this->getUser());
             $simulation->setCreatedAt(new \DateTime('now'));
-            $simulation->setState('1');
+            $simulation->setState('1'); // TODO 1 = Valid
 
             /** @var Simulation $simulation */
             $firstNeeds = $request->getSession()->get('firstNeeds');
