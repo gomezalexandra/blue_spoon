@@ -38,9 +38,6 @@
 
 
 
-
-
-
     <a class="col-xs-2 center" href="{{ path('app_flush') }}">Valider la simulation</a> </br>
-    <a class="col-xs-2 center" href="{{ path('app_new_simulation') }}">Modifier</a>
+    <a class="col-xs-2 center" href="{{ path('app_new_simulation', { slug: slug } ) }}">Modifier</a>
 {% endblock %}

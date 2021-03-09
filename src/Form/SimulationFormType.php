@@ -44,7 +44,6 @@ class SimulationFormType extends AbstractType
             ->add('name', SimulationSelectTextType::class, [
                 'required' => true,
                 //'data' => income.name == null ? 'nom par défault' : income.name, //TODO to change
-                //'data' => $name, //TODO to change
                 'help' => 'Choisissez un nom pour votre nouvelle simulation',
                 'attr' => array(
                     'placeholder' => 'Choisissez un nom pour votre nouvelle simulation'),

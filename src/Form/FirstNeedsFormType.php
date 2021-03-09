@@ -16,44 +16,44 @@ class FirstNeedsFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $session = new Session();
-        $startingCash = 0;
-        $starting_investment = 0;
-        $depreciation = 0;
-        $starting_stock = 0;
-        $others_needs = 0;
-
-        if ($session->isStarted()) {
-            /** @var FirstNeeds $firstNeeds */
-            $firstNeeds = $session->get('firstNeeds');
-
-            $startingCash = $firstNeeds->getStartingCash();
-            $starting_investment = $firstNeeds->getStartingInvestment();
-            $depreciation = $firstNeeds->getDepreciation();
-            $starting_stock = $firstNeeds->getStartingStock();
-            $others_needs = $firstNeeds->getOthersNeeds();
-        }
+//        $session = new Session();
+//        $startingCash = 0;
+//        $starting_investment = 0;
+//        $depreciation = 0;
+//        $starting_stock = 0;
+//        $others_needs = 0;
+//
+//        if ($session->isStarted()) {
+//            /** @var FirstNeeds $firstNeeds */
+//            $firstNeeds = $session->get('firstNeeds');
+//
+//            $startingCash = $firstNeeds->getStartingCash();
+//            $starting_investment = $firstNeeds->getStartingInvestment();
+//            $depreciation = $firstNeeds->getDepreciation();
+//            $starting_stock = $firstNeeds->getStartingStock();
+//            $others_needs = $firstNeeds->getOthersNeeds();
+//        }
 
         $builder
             ->add('starting_cash', MoneyType::class, [
                 'help' => 'Valeur en euros',
-                'data' => $startingCash,
+
             ])
             ->add('starting_investment', MoneyType::class, [
                 'help' => 'Valeur en euros',
-                'data' => $starting_investment,
+
             ])
             ->add('depreciation', PercentType::class, [
                 'help' => 'Pourcentage de dépréciation moyenne annuelle des investissements (exemple: 10 pour 10% par an)',
-                'data' => $depreciation,
+
             ])
             ->add('starting_stock', MoneyType::class, [
                 'help' => 'Valeur en euros',
-                'data' => $starting_stock,
+
             ])
             ->add('others_needs', MoneyType::class, [
                 'help' => 'Valeur en euros',
-                'data' => $others_needs,
+
             ])
         ;
     }

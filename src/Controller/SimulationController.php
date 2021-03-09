@@ -224,7 +224,6 @@ class SimulationController extends AbstractController
 
                 /** @var FirstNeeds $firstNeedsSession */
                 $firstNeedsSession = $request->getSession()->get('firstNeeds');
-
                 /** @var FirstNeeds $firstNeedsBDD */
                 $firstNeedsBDD = $em->getRepository(FirstNeeds::class)->findOneBy(['simulation' => $idSimulation]);
                 $firstNeedsBDD->setStartingCash($firstNeedsSession->getStartingCash());
@@ -237,21 +236,37 @@ class SimulationController extends AbstractController
                 /** @var Turnover $turnoverSession */
                 $turnoverSession = $request->getSession()->get('turnover');
                 /** @var Turnover $turnoverBDD */
-                $turnoverRepository = $em->getRepository(Turnover::class);
-                $turnoverBDD = $turnoverRepository->findOneBy(['simulation' => $idSimulation]);
+                $turnoverBDD = $em->getRepository(Turnover::class)->findOneBy(['simulation' => $idSimulation]);
+                $turnoverBDD->setMonthWorked($turnoverSession->getMonthWorked());
+                $turnoverBDD->setDaysWorked($turnoverSession->getDaysWorked());
+                $turnoverBDD->setDailyRevenue($turnoverSession->getDailyRevenue());
+                $turnoverBDD->setTurnoverIncrease($turnoverSession->getTurnoverIncrease());
+
 
                 /** @var Incomes $incomesSession */
                 $incomesSession = $request->getSession()->get('incomes');
                 /** @var Incomes $incomesBDD */
-                $incomesRepository = $em->getRepository(Incomes::class);
-                $incomesBDD = $incomesRepository->findOneBy(['simulation' => $idSimulation]);
+                $incomesBDD = $em->getRepository(Incomes::class)->findOneBy(['simulation' => $idSimulation]);
+                $incomesBDD->setBankLoan($incomesSession->getBankLoan());
+                $incomesBDD->setPersonnalContribution($incomesSession->getPersonnalContribution());
+                $incomesBDD->setContributionInKind($incomesSession->getContributionInKind());
+                $incomesBDD->setStartingGrant($incomesSession->getStartingGrant());
+                $incomesBDD->setOthersIncomes($incomesSession->getOthersIncomes());
+
 
                 /** @var Costs $costsSession */
                 $costsSession = $request->getSession()->get('costs');
                 /** @var Costs $costsBDD */
-                $costRepository = $em->getRepository(Costs::class);
-                $costsBDD = $costRepository->findOneBy(['simulation' => $idSimulation]);
-
+                //$costRepository = $em->getRepository(Costs::class);
+                $costsBDD = $em->getRepository(Costs::class)->findOneBy(['simulation' => $idSimulation]);
+                $costsBDD->setSalaries($costsSession->getSalaries());
+                $costsBDD->setSalariesIncrease($costsSession->getSalariesIncrease());
+                $costsBDD->setRent($costsSession->getRent());
+                $costsBDD->setInsurance($costsSession->getInsurance());
+                $costsBDD->setOthersFixedCosts($costsSession->getOthersFixedCosts());
+                $costsBDD->setVariableCosts($costsSession->getVariableCosts());
+                $costsBDD->setTaxes($costsSession->getTaxes());
+                $costsBDD->setCorporationTax($costsSession->getCorporationTax());
             }
 
             $em->flush();
