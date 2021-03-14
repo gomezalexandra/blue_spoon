@@ -16,11 +16,14 @@
         </div>
     </div>
 
+    {{ dump(app.session.get('turnover')) }}
+    {{ dump(app.session.get('incomes')) }}
+
     {% if app.session.get('turnover') is null %}
-        {% set monthWorked = "Mon besoin de démarrage" %}
-        {% set daysWorked = "Mon investissement initial" %}
-        {% set dailyRevenue = "La dépréciation annuelle" %}
-        {% set turnoverIncrease = "Mon stock de démarrage" %}
+        {% set monthWorked = "12" %}
+        {% set daysWorked = "365" %}
+        {% set dailyRevenue = "0" %}
+        {% set turnoverIncrease = "0" %}
     {% else %}
         {% set monthWorked = app.session.get('turnover').monthWorked %}
         {% set daysWorked = app.session.get('turnover').daysWorked %}

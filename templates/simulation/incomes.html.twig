@@ -16,13 +16,12 @@
         </div>
     </div>
 
-
     {% if app.session.get('incomes') is null %}
-        {% set bankLoan = "Mon prêt bancaire" %}
-        {% set personnalContribution = "Mon apport personnel financier" %}
-        {% set contributionInKind = "Mon apport personnel en nature" %}
-        {% set startingGrant = "Mon besoin de démarrage" %}
-        {% set othersIncomes = "Mon besoin de démarrage" %}
+        {% set bankLoan = "0" %}
+        {% set personnalContribution = "0" %}
+        {% set contributionInKind = "0" %}
+        {% set startingGrant = "0" %}
+        {% set othersIncomes = "0" %}
     {% else %}
         {% set bankLoan = app.session.get('incomes').bankLoan %}
         {% set personnalContribution = app.session.get('incomes').personnalContribution %}

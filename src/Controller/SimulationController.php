@@ -32,6 +32,8 @@ class SimulationController extends AbstractController
 
         if ($slug) {
             $this->editSimulation($slug, $em, $request);
+        } else {
+            $this->clearSession($request);
         }
 
         $simulation = new Simulation();
@@ -287,7 +289,24 @@ class SimulationController extends AbstractController
         return $this->redirectToRoute('app_new_simulation');
     }
 
+    /**
+     * @Route("/delete_simulation/{slug?}", name="app_delete_simulation")
+     */
+    public function deleteSimulation($slug, EntityManagerInterface $em, Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Simulation::class);
+        $simulationToDelete = $repository->find($slug);
+
+        $em->remove($simulationToDelete);
+        $em->flush();
+
+        return $this->redirectToRoute('app_simulations_list');
+    }
+
+
     public function editSimulation($slug, EntityManagerInterface $em, Request $request) {
+
+        $this->clearSession($request);
 
         $simulationRepository = $em->getRepository(Simulation::class);
         $firstNeedsRepository = $em->getRepository(FirstNeeds::class);
@@ -318,5 +337,15 @@ class SimulationController extends AbstractController
         $session->set('turnover', $turnover);
         $session->set('incomes', $incomes);
         $session->set('costs', $costs);
+    }
+
+    public function clearSession($request)
+    {
+        $request->getSession()->remove('idSimulation');
+        $request->getSession()->remove('simulation');
+        $request->getSession()->remove('firstNeeds');
+        $request->getSession()->remove('turnover');
+        $request->getSession()->remove('incomes');
+        $request->getSession()->remove('costs');
     }
 }

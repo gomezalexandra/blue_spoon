@@ -17,14 +17,14 @@
     </div>
 
     {% if app.session.get('costs') is null %}
-        {% set salaries = "Mon prêt bancaire" %}
-        {% set salariesIncrease = "Mon prêt bancaire" %}
-        {% set rent = "Mon apport personnel financier" %}
-        {% set insurance = "Mon apport personnel en nature" %}
-        {% set othersFixedCosts = "Mon besoin de démarrage" %}
-        {% set variableCosts = "Mon besoin de démarrage" %}
-        {% set taxes = "Mon besoin de démarrage" %}
-        {% set corporationTax = "Mon besoin de démarrage" %}
+        {% set salaries = "0" %}
+        {% set salariesIncrease = "0" %}
+        {% set rent = "0" %}
+        {% set insurance = "0" %}
+        {% set othersFixedCosts = "0" %}
+        {% set variableCosts = "0" %}
+        {% set taxes = "0" %}
+        {% set corporationTax = "0" %}
     {% else %}
         {% set salaries = app.session.get('costs').salaries %}
         {% set salariesIncrease = app.session.get('costs').salariesIncrease %}

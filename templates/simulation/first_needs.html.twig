@@ -17,11 +17,11 @@
     </div>
 
     {% if app.session.get('firstNeeds') is null %}
-        {% set startingCash = "Mon besoin de démarrage" %}
-        {% set startingInvestment = "Mon investissement initial" %}
-        {% set depreciation = "La dépréciation annuelle" %}
-        {% set startingStock = "Mon stock de démarrage" %}
-        {% set othersNeeds = "Mes autrees besoins" %}
+        {% set startingCash = "0" %}
+        {% set startingInvestment = "0" %}
+        {% set depreciation = "10" %}
+        {% set startingStock = "0" %}
+        {% set othersNeeds = "0" %}
     {% else %}
         {% set startingCash = app.session.get('firstNeeds').startingCash %}
         {% set startingInvestment = app.session.get('firstNeeds').startingInvestment %}

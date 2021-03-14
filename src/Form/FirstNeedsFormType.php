@@ -16,24 +16,6 @@ class FirstNeedsFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $session = new Session();
-//        $startingCash = 0;
-//        $starting_investment = 0;
-//        $depreciation = 0;
-//        $starting_stock = 0;
-//        $others_needs = 0;
-//
-//        if ($session->isStarted()) {
-//            /** @var FirstNeeds $firstNeeds */
-//            $firstNeeds = $session->get('firstNeeds');
-//
-//            $startingCash = $firstNeeds->getStartingCash();
-//            $starting_investment = $firstNeeds->getStartingInvestment();
-//            $depreciation = $firstNeeds->getDepreciation();
-//            $starting_stock = $firstNeeds->getStartingStock();
-//            $others_needs = $firstNeeds->getOthersNeeds();
-//        }
-
         $builder
             ->add('starting_cash', MoneyType::class, [
                 'help' => 'Valeur en euros',

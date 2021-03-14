@@ -16,9 +16,7 @@ class IncomesFormType extends AbstractType
             ->add('personnal_contribution')
             ->add('contribution_in_kind')
             ->add('starting_grant')
-            ->add('others_incomes')
-            //->add('simulation')
-        ;
+            ->add('others_incomes');
     }
 
     public function configureOptions(OptionsResolver $resolver)
