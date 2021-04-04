@@ -20,7 +20,7 @@ class SimulationFormType extends AbstractType
 //        var income = session('income');
 
 
-        $session = "new Session()";
+        //$session = "new Session()";
         //$name = '';
 
         //dump($session->isStarted());
@@ -45,8 +45,6 @@ class SimulationFormType extends AbstractType
                 'required' => true,
                 //'data' => income.name == null ? 'nom par défault' : income.name, //TODO to change
                 'help' => 'Choisissez un nom pour votre nouvelle simulation',
-                'attr' => array(
-                    'placeholder' => 'Choisissez un nom pour votre nouvelle simulation'),
             ])
 
             /*->add('created_at')

@@ -69,9 +69,9 @@ class FrontController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            /*if (!$data) {
-                return;
-            }*/
+            if (!$data) {
+                throw $this->createNotFoundException(sprintf('No data '));
+            }
             $name = $data->getName();
 
             /**@var Simulation $simulations */
@@ -79,7 +79,8 @@ class FrontController extends AbstractController
         }
 
         if (!$simulations) {
-            throw $this->createNotFoundException(sprintf('No simulation '));
+//            throw $this->createNotFoundException(sprintf('No simulation '));
+            $simulations = [];
         }
 
         return $this->render('simulations_list.html.twig', [
