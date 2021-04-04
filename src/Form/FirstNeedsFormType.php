@@ -19,7 +19,6 @@ class FirstNeedsFormType extends AbstractType
         $builder
             ->add('starting_cash', MoneyType::class, [
                 'help' => 'Valeur en euros',
-
             ])
             ->add('starting_investment', MoneyType::class, [
                 'help' => 'Valeur en euros',
@@ -27,7 +26,7 @@ class FirstNeedsFormType extends AbstractType
             ])
             ->add('depreciation', PercentType::class, [
                 'help' => 'Pourcentage de dépréciation moyenne annuelle des investissements (exemple: 10 pour 10% par an)',
-
+                'type' => 'integer',
             ])
             ->add('starting_stock', MoneyType::class, [
                 'help' => 'Valeur en euros',

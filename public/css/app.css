@@ -49,13 +49,6 @@ h3 {
     font-weight: bold;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #171C81;
-    border: 2px solid #F1C81F;
-    margin: auto;
-}
-
 .noPadding {
     padding: 0px;
 }
@@ -229,6 +222,18 @@ h3 {
 
 /* part register and login */
 
+.btn-primary {
+    color: #fff;
+    background-color: #171C81;
+    border: 2px solid #F1C81F;
+    margin: auto;
+}
+
+.btn-center {
+    display: flex;
+    justify-content: center;
+}
+
 .iconLogin {
     margin: 25px;
     text-align: center;
@@ -251,6 +256,10 @@ h3 {
     box-shadow: 7px 7px 4px #28333d42;
     position: relative;
     top: -70px;
+}
+
+.formMargin {
+    margin-bottom: 16px;
 }
 
 /* part simulation */
@@ -335,5 +344,9 @@ footer {
     color: white;
     font-size: 0.8em;
     text-align: center;
+}
+
+footer p{
+    margin-bottom: 0;
 }
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vYXBwLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDJCQUEyQjtBQUMvQiIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogbGlnaHRncmF5O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==*/
