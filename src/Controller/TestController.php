@@ -33,13 +33,17 @@ class TestController extends AbstractController
             throw $this->createNotFoundException(sprintf('No simulation or turnover')); //TODO
         }
 
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $userEmail = $user->getEmail();
+        dump($user->getEmail()); //TODO à vérifier et supprimer que bien user email
+
         $email = (new TemplatedEmail())
-            ->from('alexandragomez.work@gmail.com')
-            ->to(new Address('alexandragomez.work@gmail.com'))
-            ->subject('Thanks for signing up!')
+            ->from('bluespoonsimulation@gmail.com')
+            ->to(new Address($userEmail))
+            ->subject('Votre Simulation Blue Spoon')
 
             // path of the Twig template to render
-            ->htmlTemplate('emails/signup.html.twig')
+            ->htmlTemplate('emails/email_simulation.html.twig')
 
             // pass variables (name => value) to the template
             ->context([
@@ -47,10 +51,9 @@ class TestController extends AbstractController
                 'result' => $result,
             ]);
 
-
         $mailer->send($email);
 
-        return $this->redirectToRoute('app_dashboard');
+        return $this->redirectToRoute('app_simulations_list');
     }
 
 

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Simulation {{ simulation.name }}</h1>
+            <p>Créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</p>
+
+        <h2>Compte de résultat</h2>
+
+        <table>
+            <tr>
+                <td></td>
+                <td>Année 1</td>
+                <td>Année 2</td>
+            </tr>
+            <tr>
+                <td>chiffre d'affaire HT</td>
+                <td>{{ result.turnover1 }}</td>
+                <td>{{ result.turnover2 }}</td>
+            </tr>
+            <tr>
+                <td><h4>Total produits d'exploitation :</h4></td>
+                <td>{{ result.turnover1 }}</td>
+                <td>{{ result.turnover2 }}</td>
+            </tr>
+            <tr>
+                <td>Charges variables (dont achats consommés)</td>
+                <td>{{ result.variableCosts1 }}</td>
+                <td>{{ result.variableCosts2 }}</td>
+            </tr>
+            <tr>
+                <td>Impôts, taxes et versements assimilés</td>
+                <td>{{ result.cost.taxes }}</td>
+                <td>{{ result.cost.taxes }}</td>
+            </tr>
+            <tr>
+                <td>Salaires et charges sociales</td>
+                <td>{{ result.cost.salaries }}</td>
+                <td>{{ simulation.name }}</td>
+            </tr>
+            <tr>
+                <td>Loyer</td>
+                <td>{{ result.cost.rent }}</td>
+                <td>{{ result.cost.rent }}</td>
+            </tr>
+            <tr>
+                <td>Insurance</td>
+                <td>{{ result.cost.insurance }}</td>
+                <td>{{ result.cost.insurance }}</td>
+            </tr>
+            <tr>
+                <td>Autres coûts fixes</td>
+                <td>{{ result.cost.othersFixedCosts }}</td>
+                <td>{{ result.cost.othersFixedCosts }}</td>
+            </tr>
+            <tr>
+                <td><h4>Total charges d'exploitation :</h4></td>
+                <td>{{ simulation.name }}</td>
+                <td>{{ simulation.name }}</td>
+            </tr>
+            <tr>
+                <td><h3>Résultat d'exploitation</h3></td>
+                <td>{{ simulation.name }}</td>
+                <td>{{ simulation.name }}</td>
+            </tr>
+            <tr>
+                <td><h3>Résultat courant avant impôt</h3></td>
+                <td>{{ simulation.name }}</td>
+                <td>{{ simulation.name }}</td>
+            </tr>
+            <tr>
+                <td>Impôt sur les bénéfices</td>
+                <td>{{ result.cost.corporationTax }}</td>
+                <td>{{ simulation.name }}</td>
+            </tr>
+            <tr>
+                <td><h3>Bénéfice ou Perte</h3></td>
+                <td>{{ simulation.name }}</td>
+                <td>{{ simulation.name }}</td>
+            </tr>
+        </table>
+    </body>
+</html>
