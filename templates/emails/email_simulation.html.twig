@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>Simulation {{ simulation.name }}</h1>
-            <p>Créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</p>
+        <p>Créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</p>
 
         <h2>Compte de résultat</h2>
 
@@ -84,6 +84,8 @@
                 <td>{{ simulation.name }}</td>
                 <td>{{ simulation.name }}</td>
             </tr>
+
         </table>
+
     </body>
 </html>
