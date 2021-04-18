@@ -19,49 +19,67 @@
 
 {#TODO class to rename + check bootstrap margin#}
 
-    <div class="row blockDashboard">
-
-        <div class="col-12 backLink">
-            <a href="{{ path('app_dashboard')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-                </svg>
-                Tableau de bord
-            </a>
-        </div>
-        <div class="col-12 backLink">
-            <a href="{{ path('app_simulations_list')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-                </svg>
-                Réinitialiser la recherche
-            </a>
-        </div>
-
-        <div class="col-8 searchForm">
-            {{ form_start(simulationForm) }}
-
-            {{ form_row(simulationForm.name, {
-                attr: {placeholder: 'Recherchez une simulation' }
-            }) }}
-
-            <button type="submit" class="btn btn-primary">Chercher</button>
-
-            {{ form_end(simulationForm) }}
-        </div>
-
-        <div class="col-12">
-            {% if (simulations|length == 0) %}
-                Aucune simulation trouvée
-            {% endif %}
-            {% for simulation in simulations %}
-                <div class="simulationListLink" >
-                    <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}"> Voir {{ simulation.name }} </br> créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
+        <div class="blockDashboard">
+            <div class="row no-gutters backLink">
+                <div class="col-6">
+                    <a href="{{ path('app_dashboard')}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                        </svg>
+                        Tableau de bord
+                    </a>
                 </div>
-            {% endfor %}
-        </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <a href="{{ path('app_simulations_list')}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                        </svg>
+                        Réinitialiser la recherche
+                    </a>
+                </div>
+            </div>
 
-    </div>
+
+            <div class="row justify-content-center no-gutters">
+                <div class="col-6 searchForm">
+                    {{ form_start(simulationForm) }}
+
+                    {{ form_row(simulationForm.name, {
+                        attr: {placeholder: 'Recherchez une simulation' }
+                    }) }}
+                </div>
+                    <button type="submit" class="btn btn-primary">Chercher</button>
+                <div class="col-2 searchForm"
+                    {{ form_end(simulationForm) }}
+                </div>
+            </div>
+
+            <div class="row no-gutters align-items-center justify-content-around">
+                {% if (simulations|length == 0) %}
+                    <div class="col-12">
+                        Aucune simulation trouvée
+                    </div>
+                {% endif %}
+                {% for simulation in simulations %}
+                    <div class="col-5">
+                        <div class="simulationListLink" >
+                            <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}">{{ simulation.name }} </br> créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</a></br>
+                        </div>
+                    </div>
+                    <div class="col-5 d-flex justify-content-start">
+                        <div class="simulationListLink" >
+                            <a href="{{ path('app_simulation_view', { slug: simulation.id }) }}">
+                                Voir
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
     </div>
 
