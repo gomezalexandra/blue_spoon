@@ -4,47 +4,50 @@
 
 {% block body %}
 
-   {#
-   <div id="content">
-        <h3>Hello, this is a H3 tag</h3>
-
-       <p>A paragraph</p>
-   </div>
-   <div id="editor"></div>
-   <button id="cmd">generate PDF</button>
-    #}
    <div class="blockHead headMedium">
       <div class="row title">
          <h1 class="col-12"> Ma Simulation </h1>
       </div>
    </div>
 
-   <div class="row justify-content-start">
-      <div class="col-6 backLink">
+   <div class="row backLink no-gutters">
+      <div class="col-3">
          <a href="{{ path('app_simulations_list')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
             </svg>
             Mes simulations</a>
       </div>
-      <div class="col-6 backLink">
-         <a href="{{ path('app_new_simulation', { slug: simulation.id })}}">
-            Modifier</a>
-      </div>
-      <div class="col-6 backLink">
-         <a href="{{ path('app_delete_simulation', { slug: simulation.id })}}">
-            Supprimer</a>
+      <div class="col-3 offset-6 editLink">
+         <div>
+            <a href="{{ path('app_new_simulation', { slug: simulation.id })}}">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+               </svg>
+               Modifier
+            </a>
+         </div>
+         <div>
+            <a href="{{ path('app_delete_simulation', { slug: simulation.id })}}">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+               </svg>
+               Supprimer</a>
+         </div>
       </div>
    </div>
 
    <div class="row d-flex justify-content-center simulationDetails">
       <h2 class="col-12 title center">{{ simulation.name }}</h2>
    </div>
+
     <div class="row d-flex justify-content-center simulationDetails">
       <p class="col-12 title center">Créée le {{ simulation.createdAt|format_datetime(locale='fr') }}</p>
    </div>
 
-   <div id="hideElement">
+   <div id="hideElement"> {# div hidden when sent or downloaded #}
       <div class="row d-flex justify-content-center simulationDownload" >
          <a class="col-3 title center" href="{{ path('app_email', { slug: simulation.id }) }}">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -63,19 +66,20 @@
    </div>
 
 
-   <div class="row d-flex justify-content-center">
+   <div class="row d-flex justify-content-center no-gutters">
       <h3 class="col-12 title center simulationReport">Compte de résultat</h3>
    </div>
 
    <div id="htmltopdf">
 
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center no-gutters">
          <table class="table table-bordered border-primary table-hover">
             <thead class="table-primary">
                <tr>
                   <th scope="col"></th>
                   <th scope="col">Année 1</th>
                   <th scope="col">Année 2</th>
+                  <th scope="col">Année 3</th>
                </tr>
             </thead>
             <tbody>
@@ -83,19 +87,23 @@
                   <th scope="row">chiffre d'affaire HT</th>
                   <td>{{ result.turnover1 }}</td>
                   <td>{{ result.turnover2 }}</td>
+                  <td>{{ result.turnover3 }}</td>
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Total produits d'exploitation :</th>
                   <td class="table-primary">{{ result.turnover1 }}</td>
                   <td class="table-primary">{{ result.turnover2 }}</td>
+                  <td class="table-primary">{{ result.turnover3 }}</td>
                </tr>
                <tr>
                   <th scope="row">Charges variables (dont achats consommés)</th>
                   <td>{{ result.variableCosts1 }}</td>
                   <td>{{ result.variableCosts2 }}</td>
+                  <td>{{ result.variableCosts3 }}</td>
                </tr>
                <tr>
                   <th scope="row">Impôts, taxes et versements assimilés</th>
+                  <td>{{ result.cost.taxes }}</td>
                   <td>{{ result.cost.taxes }}</td>
                   <td>{{ result.cost.taxes }}</td>
                </tr>
@@ -103,9 +111,11 @@
                   <th scope="row">Salaires et charges sociales</th>
                   <td>{{ result.cost.salaries }}</td>
                   <td>{{ simulation.name }}</td>
+                  <td>{{ simulation.name }}</td>
                </tr>
                <tr>
                   <th scope="row">Loyer</th>
+                  <td>{{ result.cost.rent }}</td>
                   <td>{{ result.cost.rent }}</td>
                   <td>{{ result.cost.rent }}</td>
                </tr>
@@ -113,9 +123,11 @@
                   <th scope="row">Insurance</th>
                   <td>{{ result.cost.insurance }}</td>
                   <td>{{ result.cost.insurance }}</td>
+                  <td>{{ result.cost.insurance }}</td>
                </tr>
                <tr>
                   <th scope="row">Autres coûts fixes</th>
+                  <td>{{ result.cost.othersFixedCosts }}</td>
                   <td>{{ result.cost.othersFixedCosts }}</td>
                   <td>{{ result.cost.othersFixedCosts }}</td>
                </tr>
@@ -123,9 +135,11 @@
                   <th scope="row" class="table-primary">Total charges d'exploitation :</th>
                   <td class="table-primary">{{ simulation.name }}</td>
                   <td class="table-primary">{{ simulation.name }}</td>
+                  <td class="table-primary">{{ simulation.name }}</td>
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Résultat d'exploitation</th>
+                  <td class="table-primary">{{ simulation.name }}</td>
                   <td class="table-primary">{{ simulation.name }}</td>
                   <td class="table-primary">{{ simulation.name }}</td>
                </tr>
@@ -133,14 +147,17 @@
                   <th scope="row" class="table-primary">Résultat courant avant impôt</th>
                   <td class="table-primary">{{ simulation.name }}</td>
                   <td class="table-primary">{{ simulation.name }}</td>
+                  <td class="table-primary">{{ simulation.name }}</td>
                </tr>
                <tr>
                   <th scope="row">Impôt sur les bénéfices</th>
                   <td>{{ result.cost.corporationTax }}</td>
                   <td>{{ simulation.name }}</td>
+                  <td>{{ simulation.name }}</td>
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Bénéfice ou Perte</th>
+                  <td class="table-primary">{{ simulation.name }}</td>
                   <td class="table-primary">{{ simulation.name }}</td>
                   <td class="table-primary">{{ simulation.name }}</td>
                </tr>
@@ -150,25 +167,6 @@
       </div>
 
    </div>
-
-      {#
-      <div id="reportPage">
-         <div id="chartContainer" style="width: 30%;float: left;">
-            <canvas id="myChart1"></canvas>
-         </div>
-
-         <div style="width: 30%; float: left;">
-            <canvas id="myChart2"></canvas>
-         </div>
-
-         <br/><br/><br/>
-
-         <div style="width: 30%; height: 400px; clear: both;">
-            <canvas id="myChart3" style="width: 40%"></canvas>
-         </div>
-      </div>
-      #}
-
 
    <div id="reportPage">
       <div class="row d-flex justify-content-center">
@@ -183,8 +181,6 @@
          <canvas class="col-12 title center" id="myChart" width="400" height="100"></canvas>
       </div>
    </div>
-
-
 
 {% endblock %}
 

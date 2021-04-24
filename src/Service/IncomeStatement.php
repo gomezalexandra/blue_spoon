@@ -24,16 +24,20 @@ class IncomeStatement
 
         $turnover1 = ($turnover->getMonthWorked())*($turnover->getDaysWorked())*($turnover->getDailyRevenue());
         $turnover2 = $turnover1*($turnover->getTurnoverIncrease());
+        $turnover3 = $turnover2*($turnover->getTurnoverIncrease());
         $variableCosts1 = $turnover1 * ($cost->getVariableCosts());
         $variableCosts2 = $turnover2 * ($cost->getVariableCosts());
+        $variableCosts3 = $turnover3 * ($cost->getVariableCosts());
 
         return [
             'turnover' => $turnover,
             'cost' => $cost,
             'turnover1' => $turnover1,
             'turnover2' => $turnover2,
+            'turnover3' => $turnover3,
             'variableCosts1' => $variableCosts1,
             'variableCosts2' => $variableCosts2,
+            'variableCosts3' => $variableCosts3,
         ];
     }
 
