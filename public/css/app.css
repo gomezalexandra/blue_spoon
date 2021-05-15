@@ -339,6 +339,14 @@ text-align: right;
     font-size: 1.4em;
 }
 
+/* profile */
+.profileDashboard {
+    height: 400px;
+}
+
+.profileTable {
+    margin-top: 50px;
+}
 /* footer */
 
 footer {

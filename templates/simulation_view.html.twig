@@ -90,7 +90,7 @@
                   <td>{{ result.turnover3 }}</td>
                </tr>
                <tr>
-                  <th scope="row" class="table-primary">Total produits d'exploitation :</th>
+                  <th scope="row" class="table-primary">Total produits d'exploitation</th>
                   <td class="table-primary">{{ result.turnover1 }}</td>
                   <td class="table-primary">{{ result.turnover2 }}</td>
                   <td class="table-primary">{{ result.turnover3 }}</td>
@@ -103,15 +103,15 @@
                </tr>
                <tr>
                   <th scope="row">Impôts, taxes et versements assimilés</th>
-                  <td>{{ result.cost.taxes }}</td>
-                  <td>{{ result.cost.taxes }}</td>
-                  <td>{{ result.cost.taxes }}</td>
+                  <td>{{ result.taxes1 }}</td>
+                  <td>{{ result.taxes2 }}</td>
+                  <td>{{ result.taxes3 }}</td>
                </tr>
                <tr>
                   <th scope="row">Salaires et charges sociales</th>
-                  <td>{{ result.cost.salaries }}</td>
-                  <td>{{ simulation.name }}</td>
-                  <td>{{ simulation.name }}</td>
+                  <td>{{ result.salary1 }}</td>
+                  <td>{{ result.salary2 }}</td>
+                  <td>{{ result.salary3 }}</td>
                </tr>
                <tr>
                   <th scope="row">Loyer</th>
@@ -132,16 +132,16 @@
                   <td>{{ result.cost.othersFixedCosts }}</td>
                </tr>
                <tr>
-                  <th scope="row" class="table-primary">Total charges d'exploitation :</th>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
+                  <th scope="row" class="table-primary">Total charges d'exploitation</th>
+                  <td class="table-primary">{{ result.totalCosts1 }}</td>
+                  <td class="table-primary">{{ result.totalCosts2 }}</td>
+                  <td class="table-primary">{{ result.totalCosts3 }}</td>
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Résultat d'exploitation</th>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
+                  <td class="table-primary">{{ result.businessResult1 }}</td>
+                  <td class="table-primary">{{ result.businessResult2 }}</td>
+                  <td class="table-primary">{{ result.businessResult3 }}</td>
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Résultat courant avant impôt</th>
@@ -151,7 +151,7 @@
                </tr>
                <tr>
                   <th scope="row">Impôt sur les bénéfices</th>
-                  <td>{{ result.cost.corporationTax }}</td>
+                  <td>{{ simulation.name  }}</td> {# corporate tax done but RCAI is missing #}
                   <td>{{ simulation.name }}</td>
                   <td>{{ simulation.name }}</td>
                </tr>

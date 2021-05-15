@@ -30,14 +30,17 @@ class CostsFormType extends AbstractType
             ->add('others_fixed_costs', MoneyType::class, [
                 'help' => 'Valeur en euros',
             ])
-            ->add('variable_costs', MoneyType::class, [
+            ->add('variable_costs', PercentType::class, [
                 'help' => 'Valeur en euros',
+                'type' => 'integer',
             ])
-            ->add('taxes', MoneyType::class, [
-                'help' => 'Valeur en euros',
+            ->add('taxes', PercentType::class, [
+                'help' => 'Valeur en pourcentage',
+                'type' => 'integer',
             ])
-            ->add('corporation_tax', MoneyType::class, [
-                'help' => 'Valeur en euros',
+            ->add('corporation_tax', PercentType::class, [
+                'help' => 'Valeur en pourcentage',
+                'type' => 'integer',
             ])
         ;
     }

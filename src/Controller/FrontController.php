@@ -157,6 +157,13 @@ class FrontController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/profile", name="app_profile")
+     */
+    public function profile() {
+
+        return $this->render('profile.html.twig');
+    }
 
     /**
      * @Route("/login", name="app_login")
