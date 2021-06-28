@@ -19,21 +19,26 @@ class FirstNeedsFormType extends AbstractType
         $builder
             ->add('starting_cash', MoneyType::class, [
                 'help' => 'Valeur en euros',
+                'label' => 'Trésorerie de démarrage nécessaire',
             ])
             ->add('starting_investment', MoneyType::class, [
                 'help' => 'Valeur en euros',
+                'label' => 'Investissement initial nécessaire',
 
             ])
             ->add('depreciation', PercentType::class, [
                 'help' => 'Pourcentage de dépréciation moyenne annuelle des investissements (exemple: 10 pour 10% par an)',
                 'type' => 'integer',
+                'label' => 'Dépréciation de l\'investissement',
             ])
             ->add('starting_stock', MoneyType::class, [
                 'help' => 'Valeur en euros',
+                'label' => 'Stock de démarrage nécessaire',
 
             ])
             ->add('others_needs', MoneyType::class, [
                 'help' => 'Valeur en euros',
+                'label' => 'Autres besoins de démarrage',
 
             ])
         ;

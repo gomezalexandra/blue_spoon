@@ -17,7 +17,7 @@
     </div>
 
     {% if app.session.get('simulation') is null %}
-        {% set simulationName = "nom de la simulation" %}
+        {% set simulationName = "Nouvelle simulation" %}
     {% else %}
         {% set simulationName = app.session.get('simulation').name %}
     {% endif %}
@@ -26,13 +26,13 @@
         <div class="col-8">
             {{ form_start(simulationForm) }}
 
-            {{ form_label(simulationForm.name, 'Nom de la simulation') }}
+            {# {{ form_label(simulationForm.name, 'Nom de la simulation test') }} #}
 
             {{ form_row(simulationForm.name, {'value': simulationName}) }}
 
-           {# {{ form_widget(simulationForm.name) }} #}
+            {# {{ form_widget(simulationForm.name) }} #}
 
-            <small>{{ form_help(simulationForm.name) }}</small>
+            {# <small>{{ form_help(simulationForm.name) }}</small> #}
 
             <button type="submit" class="btn btn-primary simulationFormButton">Valider</button>
             {{ form_end(simulationForm) }}

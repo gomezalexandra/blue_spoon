@@ -84,7 +84,7 @@
             </thead>
             <tbody>
                <tr>
-                  <th scope="row">chiffre d'affaire HT</th>
+                  <th scope="row">Chiffre d'affaire HT</th>
                   <td>{{ result.turnover1 }}</td>
                   <td>{{ result.turnover2 }}</td>
                   <td>{{ result.turnover3 }}</td>
@@ -145,21 +145,21 @@
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Résultat courant avant impôt</th>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
+                  <td class="table-primary">{{ result.resultBeforeTax1 }}</td>
+                  <td class="table-primary">{{ result.resultBeforeTax2 }}</td>
+                  <td class="table-primary">{{ result.resultBeforeTax3 }}</td>
                </tr>
                <tr>
                   <th scope="row">Impôt sur les bénéfices</th>
-                  <td>{{ simulation.name  }}</td> {# corporate tax done but RCAI is missing #}
-                  <td>{{ simulation.name }}</td>
-                  <td>{{ simulation.name }}</td>
+                  <td>{{ result.corporateTaxes1 }}</td> {# corporate tax done but RCAI is missing #}
+                  <td>{{ result.corporateTaxes2 }}</td>
+                  <td>{{ result.corporateTaxes3 }}</td>
                </tr>
                <tr>
                   <th scope="row" class="table-primary">Bénéfice ou Perte</th>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
-                  <td class="table-primary">{{ simulation.name }}</td>
+                  <td class="table-primary">{{ result.revenue1 }}</td>
+                  <td class="table-primary">{{ result.revenue2 }}</td>
+                  <td class="table-primary">{{ result.revenue3 }}</td>
                </tr>
             </tbody>
 
@@ -174,12 +174,13 @@
       </div>
 
       <div class="row d-flex justify-content-center">
+         <canvas class="col-12 title center" id="myChart" width="400" height="100"></canvas>
+      </div>
+
+      <div class="row d-flex justify-content-center">
          <canvas class="col-12 title center" id="myDoughnutChart" width="400" height="100"></canvas>
       </div>
 
-       <div class="row d-flex justify-content-center">
-         <canvas class="col-12 title center" id="myChart" width="400" height="100"></canvas>
-      </div>
    </div>
 
 {% endblock %}
@@ -193,23 +194,17 @@
       var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-         labels: ['Besoin initial', 'Apport initial', "Chiffre d\'affaire", 'Charge fixes', 'Charges variables'],
+         labels: ['Besoin initial', 'Apport initial'],
          datasets: [{
-            label: "valeur en euros par année d\'exercice",
-            data: [25, 19, 2, 2, {{ simulation.id }}],
+            label: "valeur en euros",
+            data: [{{result.firstNeeds}}, {{result.contribution}}],
                   backgroundColor: [
                      'rgba(255, 99, 132, 0.2)',
                      'rgba(54, 162, 235, 0.2)',
-                     'rgba(255, 206, 86, 0.2)',
-                     'rgba(75, 192, 192, 0.2)',
-                     'rgba(153, 102, 255, 0.2)'
                   ],
                   borderColor: [
                      'rgba(255, 99, 132, 1)',
                      'rgba(54, 162, 235, 1)',
-                     'rgba(255, 206, 86, 1)',
-                     'rgba(75, 192, 192, 1)',
-                     'rgba(153, 102, 255, 1)'
                   ],
                   borderWidth: 1
                }]
@@ -217,7 +212,7 @@
             options: {
                title: {
                   display: true,
-                  text: 'Comparaison revenus/charges',
+                  text: 'Financement initial (comparatif apports vs besoins initiaux)',
                   fontSize: 20,
                },
                scales: {
@@ -261,7 +256,7 @@
             options: {
                   title: {
                      display: true,
-                     text: 'Répartition des charges',
+                     text: 'Répartition des charges (année 1)',
                      fontSize: 20,
                   },
                scales: {

@@ -13,6 +13,8 @@ use App\Form\SimulationFormType;
 use App\Form\UserFormType;
 use App\Form\UserRegistrationFormType;
 use App\Repository\CostsRepository;
+use App\Repository\FirstNeedsRepository;
+use App\Repository\IncomesRepository;
 use App\Repository\SimulationRepository;
 use App\Repository\TurnoverRepository;
 use App\Service\IncomeStatement;
@@ -110,7 +112,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/simulation_view/{slug}", name="app_simulation_view")
      */
-    public function simulationView($slug, IncomeStatement $incomeStatement, SimulationRepository $simulationRepository, TurnoverRepository $turnoverRepository, CostsRepository $costsRepository) {
+    public function simulationView($slug, IncomeStatement $incomeStatement, SimulationRepository $simulationRepository, TurnoverRepository $turnoverRepository, CostsRepository $costsRepository, FirstNeedsRepository $firstNeedsRepository, IncomesRepository $incomesRepository) {
 
         $simulation = $simulationRepository->find($slug);
 
@@ -149,7 +151,7 @@ class FrontController extends AbstractController
 
             $this->addFlash('success', 'Enregistrement effectué !');
 
-            return $this->redirectToRoute('app_dashboard');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('register.html.twig', [
@@ -163,6 +165,14 @@ class FrontController extends AbstractController
     public function profile() {
 
         return $this->render('profile.html.twig');
+    }
+
+    /**
+     * @Route("/contact", name="app_contact")
+     */
+    public function contact() {
+
+        return $this->render('contact.html.twig');
     }
 
     /**

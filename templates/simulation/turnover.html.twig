@@ -21,7 +21,7 @@
 
     {% if app.session.get('turnover') is null %}
         {% set monthWorked = "12" %}
-        {% set daysWorked = "365" %}
+        {% set daysWorked = "30" %}
         {% set dailyRevenue = "0" %}
         {% set turnoverIncrease = "0" %}
     {% else %}
