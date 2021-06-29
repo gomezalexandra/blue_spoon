@@ -18,6 +18,8 @@ use App\Repository\IncomesRepository;
 use App\Repository\SimulationRepository;
 use App\Repository\TurnoverRepository;
 use App\Service\IncomeStatement;
+use ContainerDl8CESw\getSecurity_HttpUtilsService;
+use ContainerDl8CESw\getUserInterfaceService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,9 +67,19 @@ class FrontController extends AbstractController
         $form = $this->createForm(SimulationFormType::class);
         $form->handleRequest($request);
 
+        /*$repository = $em->getRepository(Simulation::class);
+        /**@var Simulation $simulations */
+        /*$simulations = $repository->findBy([], ['id' => 'DESC']);*/
+
+        $user = $this->getUser();
+        $emailUser = $user->getUsername();
+        $userRepository = $em->getRepository(User::class);
+        $userLogged = $userRepository->findBy(['email' => $emailUser]);
+        $userId = $userLogged[0]->getId();
+
         $repository = $em->getRepository(Simulation::class);
         /**@var Simulation $simulations */
-        $simulations = $repository->findBy([], ['id' => 'DESC']);
+        $simulations = $repository->getMySimulations($userId);
 
         if($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
@@ -77,7 +89,7 @@ class FrontController extends AbstractController
             $name = $data->getName();
 
             /**@var Simulation $simulations */
-            $simulations = $repository->findBy(['name' => $name],['id' => 'DESC']);
+            $simulations = $repository->findBy(['name' => $name, 'user_id' => $userId],['id' => 'DESC']);
         }
 
         if (!$simulations) {

@@ -5,6 +5,7 @@ $(document).ready(function() {
         $(this).autocomplete({hint: false}, [
             {
                 source: function(query, cb) {
+                    console.log(query);
                     $.ajax({
                         url: autocompleteUrl+'?query='+query
                     }).then(function(data) {

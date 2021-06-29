@@ -22,12 +22,27 @@ class SimulationRepository extends ServiceEntityRepository
     /**
      * @return Simulation[]
      */
-    public function findAllSimulationsMatching(string $query)
+    public function findAllSimulationsMatching(string $query, string $userId)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.name LIKE :query')
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.name LIKE :query')
+            ->andWhere('s.user_id = :userId')
             ->setParameter('query', '%'.$query.'%')
+            ->setParameter('userId', $userId)
             ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Simulation[]
+     */
+    public function getMySimulations(string $userId)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.user_id = :userId')
+            ->setParameter('userId', $userId)
+            ->orderBy('s.id', 'DESC')
             ->getQuery()
             ->getResult();
     }
